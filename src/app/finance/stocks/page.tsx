@@ -7,10 +7,11 @@ function Stocks() {
   const searchParams = useSearchParams();
 
   const stockSymbol = searchParams.get("symbol") ?? "AMEX:VOO";
+  const height = searchParams.get("height") ?? "400";
 
   const config = `
   {
-    "autosize": true,
+    "height": "${height}",
     "symbol": "${stockSymbol}",
     "interval": "D",
     "timezone": "Etc/UTC",
