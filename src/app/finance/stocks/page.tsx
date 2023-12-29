@@ -1,38 +1,33 @@
-"use client";
 import React, { memo } from "react";
-import Script from "next/script";
-import { useSearchParams } from "next/navigation";
+import Chart from "@/components/Chart";
 
-function Stocks() {
-  const searchParams = useSearchParams();
+import type { Metadata, ResolvingMetadata } from "next";
 
-  const stockSymbol = searchParams.get("symbol") ?? "AMEX:VOO";
-  const height = searchParams.get("height") ?? "400";
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string };
+};
 
-  const config = `
-  {
-    "height": "${height}",
-    "symbol": "${stockSymbol}",
-    "interval": "D",
-    "timezone": "Etc/UTC",
-    "theme": "light",
-    "style": "1",
-    "locale": "en",
-    "enable_publishing": false,
-    "allow_symbol_change": true,
-    "support_host": "https://www.tradingview.com"
-  }`;
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const stockSymbol = searchParams["symbol"] ?? "AMEX:VOO";
+  const height = searchParams["height"] ?? "400";
+
+  return {
+    title: stockSymbol,
+    description: `A widget that displays a live chart of the stock ${stockSymbol}`,
+  };
+}
+
+export default function Stocks({ params, searchParams }: Props) {
+  const stockSymbol = searchParams["symbol"] ?? "AMEX:VOO";
+  const height = searchParams["height"] ?? "400";
 
   return (
     <>
-      <Script
-        src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
-        id="script"
-      >
-        {config}
-      </Script>
+      <Chart stockSymbol={stockSymbol} height={height}></Chart>
     </>
   );
 }
-
-export default memo(Stocks);
