@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Exo } from "next/font/google";
+import Copyright from "./Copyright";
 
 const pacifico = Exo({ subsets: ["latin"] });
 
@@ -25,7 +26,11 @@ export default function HomeLayout({
         </div>
       </div>
       <div className="w-full">{children}</div>
-      <iframe className="h-20" src="/copyright"></iframe>
+      <div className="flex w-full p-2">
+        <div className="m-auto">
+          <Copyright />
+        </div>
+      </div>
     </main>
   );
 }
