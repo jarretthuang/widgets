@@ -1,16 +1,37 @@
-import HomeLayout from "@/components/HomeLayout";
-import type { Metadata } from "next";
+"use client";
+import React, { memo } from "react";
+import Script from "next/script";
+import { useSearchParams } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Widgets | Finance",
-  description: "A collection of web widgets for finance",
-};
+function Stocks() {
+  const searchParams = useSearchParams();
 
-export default function Stocks() {
+  const stockSymbol = searchParams.get("symbol") ?? "AMEX:VOO";
+
+  const config = `
+  {
+    "autosize": true,
+    "symbol": "${stockSymbol}",
+    "interval": "D",
+    "timezone": "Etc/UTC",
+    "theme": "light",
+    "style": "1",
+    "locale": "en",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "support_host": "https://www.tradingview.com"
+  }`;
+
   return (
-    <HomeLayout title="finance / stocks">
-      <h1>Finance Widgets / Stocks</h1>
-      <div className="flex flex-row"></div>
-    </HomeLayout>
+    <>
+      <Script
+        src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
+        id="script"
+      >
+        {config}
+      </Script>
+    </>
   );
 }
+
+export default memo(Stocks);
