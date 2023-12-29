@@ -2,7 +2,7 @@
 import React, { memo } from "react";
 import Script from "next/script";
 
-function StocksBySymbol({ symbol = "AMEX:VOO" }: { symbol?: string }) {
+function StocksBySymbol({ symbol = "AMEX:VOO" }: { symbol: string }) {
   const config = `
   {
     "autosize": true,
