@@ -12,8 +12,10 @@ export default function HomeLayout({
   title?: string;
 }) {
   return (
-    <main className="flex h-svh w-screen flex-col justify-between bg-gradient-to-br from-emerald-100 to-cyan-100 p-6 text-slate-700 dark:from-slate-950 dark:to-stone-800 dark:text-slate-100">
-      <div className="flex select-none flex-row content-center pb-5">
+    <main
+      className={`${pacifico.className} flex h-svh w-screen flex-col items-center justify-between bg-gradient-to-br from-emerald-100 to-cyan-100 p-6 text-slate-700 dark:from-stone-900 dark:to-black dark:text-slate-100`}
+    >
+      <div className="flex w-full max-w-6xl select-none flex-row content-center pb-5">
         <Image
           src="/favicon.ico"
           alt="Logo"
@@ -21,12 +23,15 @@ export default function HomeLayout({
           width={40}
           height={40}
         />
-        <div className={`px-2 text-3xl font-semibold ${pacifico.className}`}>
-          widgets{title && ` / ${title}`}
+        <div className="inline whitespace-nowrap px-2 text-3xl font-semibold">
+          <a href="/" className="font-bold hover:opacity-80">
+            widgets
+          </a>
+          <span>{title && ` / ${title}`}</span>
         </div>
       </div>
-      <div className="w-full">{children}</div>
-      <div className="flex w-full p-2">
+      <div className="w-full max-w-6xl flex-1">{children}</div>
+      <div className="flex w-full max-w-6xl p-2">
         <div className="m-auto">
           <Copyright />
         </div>
