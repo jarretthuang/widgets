@@ -30,7 +30,7 @@ export default function HomeLayout({
           <span>{title && ` / ${title}`}</span>
         </div>
       </div>
-      <div className="h-1 min-h-[70svh] w-full max-w-6xl">{children}</div>
+      <div className="h-fit min-h-[70svh] w-full max-w-6xl">{children}</div>
       <div className="flex w-full max-w-6xl p-5">
         <div className="m-auto">
           <Copyright />
