@@ -8,6 +8,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <meta
+        name="theme-color"
+        media="(prefers-color-scheme: dark)"
+        content="#092835"
+      />
+      <meta name="theme-color" content="#d0faec" />
       <body>{children}</body>
       <Analytics />
     </html>
