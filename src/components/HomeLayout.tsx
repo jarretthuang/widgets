@@ -13,7 +13,7 @@ export default function HomeLayout({
 }) {
   return (
     <main
-      className={`${pacifico.className} flex h-svh w-screen flex-col items-center justify-between bg-gradient-to-br from-emerald-100 to-cyan-100 p-6 text-slate-700 dark:from-stone-900 dark:to-black dark:text-slate-100`}
+      className={`${pacifico.className} flex h-svh w-screen flex-col items-center justify-between bg-gradient-to-br from-emerald-100 to-cyan-100 p-6 text-slate-700 dark:from-cyan-950 dark:to-stone-950 dark:text-slate-100`}
     >
       <div className="flex w-full max-w-6xl select-none flex-row content-center pb-5">
         <Image
