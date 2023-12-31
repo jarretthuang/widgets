@@ -1,13 +1,14 @@
-"use client";
 import React, { memo } from "react";
 import Script from "next/script";
 
 function Chart({
   stockSymbol,
   height,
+  allowChange,
 }: {
   stockSymbol: string;
   height: string;
+  allowChange: boolean;
 }) {
   const config = `
   {
@@ -19,7 +20,7 @@ function Chart({
     "style": "1",
     "locale": "en",
     "enable_publishing": false,
-    "allow_symbol_change": true,
+    "allow_symbol_change": ${allowChange},
     "support_host": "https://www.tradingview.com"
   }`;
 

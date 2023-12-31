@@ -1,4 +1,3 @@
-import React, { memo } from "react";
 import Chart from "@/components/Chart";
 
 import type { Metadata, ResolvingMetadata } from "next";
@@ -24,10 +23,15 @@ export async function generateMetadata(
 export default function Stocks({ params, searchParams }: Props) {
   const stockSymbol = searchParams["symbol"] ?? "AMEX:VOO";
   const height = searchParams["height"] ?? "400";
+  const allowChange: boolean = searchParams["allowChange"] === "true";
 
   return (
     <>
-      <Chart stockSymbol={stockSymbol} height={height}></Chart>
+      <Chart
+        stockSymbol={stockSymbol}
+        height={height}
+        allowChange={allowChange}
+      ></Chart>
     </>
   );
 }

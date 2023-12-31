@@ -1,8 +1,6 @@
-import Chart from "@/components/Chart";
 import HomeLayout from "@/components/HomeLayout";
 import type { Metadata } from "next";
 import LinkIcon from "@mui/icons-material/Link";
-
 export const metadata: Metadata = {
   title: "Widgets | Finance",
   description: "A collection of web widgets for finance",
@@ -24,7 +22,7 @@ export default function Finance() {
         </div>
         <div className="flex-1 py-2">
           <iframe
-            className="h-full w-full"
+            className="h-[450px] w-full rounded-lg bg-white p-4"
             src="/finance/stocks?symbol=AMEX:VOO"
           ></iframe>
         </div>
