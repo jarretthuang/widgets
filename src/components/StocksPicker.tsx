@@ -19,7 +19,7 @@ export default function StocksPicker() {
         <input
           type="text"
           placeholder="Stock Symbol"
-          className="input w-full rounded-lg border-2 border-slate-500 bg-transparent bg-white p-2 focus:border-slate-300 focus:outline-none dark:border-slate-200 dark:focus:border-gray-400"
+          className="input w-full rounded-lg border-2 border-slate-500 bg-white/0 bg-white p-2 focus:border-slate-300 focus:outline-none dark:border-slate-200 dark:focus:border-gray-400"
           value={stockSymbol}
           onChange={(e) => updateStockSymbol(e.target.value)}
         />
