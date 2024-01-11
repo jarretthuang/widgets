@@ -17,7 +17,7 @@ export default function HomeLayout({
       className={`${pacifico.className} relative flex h-fit min-h-svh w-screen flex-col  items-center justify-between  p-6 text-slate-700  dark:text-slate-100`}
     >
       <div
-        className={`simple-gradient dark:diverse-gradient absolute bottom-0 left-0 right-0 top-0 z-0 h-full w-full dark:m-auto dark:w-1/2 md:dark:w-1/4`}
+        className={`simple-gradient dark:diverse-gradient absolute bottom-0 left-0 right-0 top-0 z-0 h-full w-full opacity-90 dark:opacity-20`}
       ></div>
       <div className="z-10 flex w-full max-w-6xl select-none flex-row content-center pb-5">
         <Image
