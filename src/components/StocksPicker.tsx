@@ -17,6 +17,10 @@ export default function StocksPicker() {
   const [debouncedStockSymbol] = useDebounce(stockSymbol, 500);
 
   const stockChartUrl = `/finance/stocks?symbol=${debouncedStockSymbol}`;
+  const updateStockSymbolWithDefault = (symbol: string) => {
+    const symbolOrDefault = symbol ? symbol : "SPX500";
+    updateStockSymbol(symbolOrDefault);
+  };
 
   const presetStocks = [
     PresetStock("SPX500", "🇺🇸 S&P 500"),
@@ -38,14 +42,15 @@ export default function StocksPicker() {
           placeholder="Stock Symbol"
           className="input w-full rounded-lg border border-stone-400 bg-white  bg-white/0 p-2 focus:border-stone-800 focus:outline-none md:w-72 dark:border-stone-700 dark:focus:border-gray-600"
           value={stockSymbol}
-          onChange={(e) => updateStockSymbol(e.target.value)}
+          onChange={(e) => updateStockSymbolWithDefault(e.target.value)}
         />
         <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
           {presetStocks.map((stock) => (
             <div
               key={stock.symbol}
-              className="rounded border  bg-lime-50/80 px-2 py-1 font-medium hover:bg-lime-100/70 active:bg-lime-100/70 dark:border-stone-700 dark:bg-stone-800 dark:hover:bg-stone-900 dark:active:bg-stone-900"
-              onClick={() => updateStockSymbol(stock.symbol)}
+              className="rounded border  bg-lime-50/80 px-2 py-1 font-medium hover:bg-lime-100/70 active:bg-lime-100/70 data-[selected=true]:bg-lime-100/70 dark:border-stone-700 dark:bg-stone-800 dark:hover:bg-stone-900 dark:active:bg-stone-900 dark:data-[selected=true]:bg-stone-900"
+              data-selected={debouncedStockSymbol === stock.symbol}
+              onClick={() => updateStockSymbolWithDefault(stock.symbol)}
             >
               {stock.displayName}
             </div>
