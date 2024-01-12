@@ -31,12 +31,12 @@ export default function StocksPicker() {
       <div className="py-2 text-3xl">
         <span className="pr-2 font-semibold">Stocks</span>
       </div>
-      <div className="flex w-full flex-col gap-2 whitespace-nowrap rounded-lg border border-stone-700 px-8 py-6 dark:bg-stone-950/50">
+      <div className="flex w-full flex-col gap-2 whitespace-nowrap rounded-lg border bg-white/50 px-8 py-6 shadow-lg dark:border-stone-700 dark:bg-stone-950/50">
         <span className="pb-2 text-lg font-medium">Stock Symbol</span>
         <input
           type="text"
           placeholder="Stock Symbol"
-          className="input w-full rounded-lg border border-stone-700 bg-white bg-white/0 p-2 focus:border-slate-400 focus:outline-none md:w-72 dark:border-stone-700 dark:focus:border-gray-600"
+          className="input w-full rounded-lg border border-stone-400 bg-white  bg-white/0 p-2 focus:border-stone-800 focus:outline-none md:w-72 dark:border-stone-700 dark:focus:border-gray-600"
           value={stockSymbol}
           onChange={(e) => updateStockSymbol(e.target.value)}
         />
@@ -44,7 +44,7 @@ export default function StocksPicker() {
           {presetStocks.map((stock) => (
             <div
               key={stock.symbol}
-              className="rounded border border-stone-700 px-2 py-1 font-medium hover:opacity-90 active:opacity-90 dark:bg-stone-800"
+              className="rounded border  bg-lime-50/80 px-2 py-1 font-medium hover:bg-lime-100/70 active:bg-lime-100/70 dark:border-stone-700 dark:bg-stone-800 dark:hover:bg-stone-900 dark:active:bg-stone-900"
               onClick={() => updateStockSymbol(stock.symbol)}
             >
               {stock.displayName}
@@ -52,7 +52,7 @@ export default function StocksPicker() {
           ))}
         </div>
       </div>
-      <div className="flex-1 rounded-lg border border-stone-700 px-8 py-6 dark:bg-stone-950/50">
+      <div className="flex-1 rounded-lg border bg-white/50 px-8 py-6 shadow-lg dark:border-stone-700 dark:bg-stone-950/50">
         <div className="flex items-center whitespace-nowrap pb-2 text-lg">
           <span className="pr-2 font-medium">Live Chart</span>
           <a
@@ -64,7 +64,7 @@ export default function StocksPicker() {
           </a>
         </div>
         <iframe
-          className="h-[450px] w-full rounded-lg bg-white p-4 shadow-lg dark:shadow-none"
+          className="mb-4 h-[450px] w-full rounded-lg border bg-white p-4"
           src={stockChartUrl}
         ></iframe>
       </div>
