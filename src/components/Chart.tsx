@@ -5,10 +5,12 @@ function Chart({
   stockSymbol,
   height,
   allowChange,
+  theme,
 }: {
   stockSymbol: string;
   height: string;
   allowChange: boolean;
+  theme: string;
 }) {
   const config = `
   {
@@ -16,7 +18,7 @@ function Chart({
     "symbol": "${stockSymbol}",
     "interval": "D",
     "timezone": "Etc/UTC",
-    "theme": "light",
+    "theme": "${theme}",
     "style": "1",
     "locale": "en",
     "enable_publishing": false,

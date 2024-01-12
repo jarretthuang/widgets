@@ -24,6 +24,7 @@ export default function Stocks({ params, searchParams }: Props) {
   const stockSymbol = searchParams["symbol"] ?? "AMEX:VOO";
   const height = searchParams["height"] ?? "400";
   const allowChange: boolean = searchParams["allowChange"] === "true";
+  const theme: string = searchParams["theme"] ?? "light";
 
   return (
     <>
@@ -31,6 +32,7 @@ export default function Stocks({ params, searchParams }: Props) {
         stockSymbol={stockSymbol}
         height={height}
         allowChange={allowChange}
+        theme={theme}
       ></Chart>
     </>
   );
