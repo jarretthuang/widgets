@@ -25,25 +25,25 @@ export default function StocksPicker() {
         />
         <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
           <div
-            className="rounded border border-stone-700 px-2 py-1 font-medium text-slate-800 hover:opacity-90 active:opacity-90 dark:bg-stone-50"
+            className="rounded border border-stone-700 px-2 py-1 font-medium hover:opacity-90 active:opacity-90 dark:bg-stone-800"
             onClick={() => updateStockSymbol("SPX500")}
           >
             🇺🇸 S&P 500
           </div>
           <div
-            className="rounded border border-stone-700 px-2 py-1 font-medium text-slate-800 hover:opacity-90 active:opacity-90 dark:bg-stone-50"
+            className="rounded border border-stone-700 px-2 py-1 font-medium hover:opacity-90 active:opacity-90 dark:bg-stone-800"
             onClick={() => updateStockSymbol("AAPL")}
           >
             🇺🇸 Apple
           </div>
           <div
-            className="rounded border border-stone-700 px-2 py-1 font-medium text-slate-800 hover:opacity-90 active:opacity-90 dark:bg-stone-50"
+            className="rounded border border-stone-700 px-2 py-1 font-medium  hover:opacity-90 active:opacity-90 dark:bg-stone-800"
             onClick={() => updateStockSymbol("TSX")}
           >
             🇨🇦 Toronto
           </div>
           <div
-            className="rounded border border-stone-700 px-2 py-1 font-medium text-slate-800 hover:opacity-90 active:opacity-90 dark:bg-stone-50"
+            className="rounded border border-stone-700 px-2 py-1 font-medium  hover:opacity-90 active:opacity-90 dark:bg-stone-800"
             onClick={() => updateStockSymbol("399001")}
           >
             🇨🇳 Shenzhen
