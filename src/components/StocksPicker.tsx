@@ -3,11 +3,28 @@ import LinkIcon from "@mui/icons-material/Link";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
 
+type PresetStock = {
+  symbol: string;
+  displayName: string;
+};
+
+function PresetStock(symbol: string, displayName: string): PresetStock {
+  return { symbol, displayName };
+}
+
 export default function StocksPicker() {
   const [stockSymbol, updateStockSymbol] = useState("SPX500");
   const [debouncedStockSymbol] = useDebounce(stockSymbol, 500);
 
   const stockChartUrl = `/finance/stocks?symbol=${debouncedStockSymbol}`;
+
+  const presetStocks = [
+    PresetStock("SPX500", "🇺🇸 S&P 500"),
+    PresetStock("AAPL", "🇺🇸 Apple"),
+    PresetStock("TSLA", "🇺🇸 Tesla"),
+    PresetStock("TSX", "🇨🇦 Toronto"),
+    PresetStock("399001", "🇨🇳 Shenzhen"),
+  ];
 
   return (
     <div className="flex h-full w-full flex-col gap-6">
@@ -24,30 +41,15 @@ export default function StocksPicker() {
           onChange={(e) => updateStockSymbol(e.target.value)}
         />
         <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
-          <div
-            className="rounded border border-stone-700 px-2 py-1 font-medium hover:opacity-90 active:opacity-90 dark:bg-stone-800"
-            onClick={() => updateStockSymbol("SPX500")}
-          >
-            🇺🇸 S&P 500
-          </div>
-          <div
-            className="rounded border border-stone-700 px-2 py-1 font-medium hover:opacity-90 active:opacity-90 dark:bg-stone-800"
-            onClick={() => updateStockSymbol("AAPL")}
-          >
-            🇺🇸 Apple
-          </div>
-          <div
-            className="rounded border border-stone-700 px-2 py-1 font-medium  hover:opacity-90 active:opacity-90 dark:bg-stone-800"
-            onClick={() => updateStockSymbol("TSX")}
-          >
-            🇨🇦 Toronto
-          </div>
-          <div
-            className="rounded border border-stone-700 px-2 py-1 font-medium  hover:opacity-90 active:opacity-90 dark:bg-stone-800"
-            onClick={() => updateStockSymbol("399001")}
-          >
-            🇨🇳 Shenzhen
-          </div>
+          {presetStocks.map((stock) => (
+            <div
+              key={stock.symbol}
+              className="rounded border border-stone-700 px-2 py-1 font-medium hover:opacity-90 active:opacity-90 dark:bg-stone-800"
+              onClick={() => updateStockSymbol(stock.symbol)}
+            >
+              {stock.displayName}
+            </div>
+          ))}
         </div>
       </div>
       <div className="flex-1 rounded-lg border border-stone-700 px-8 py-6 dark:bg-stone-950/50">
@@ -62,7 +64,7 @@ export default function StocksPicker() {
           </a>
         </div>
         <iframe
-          className="h-[450px] w-full rounded-lg bg-white p-4"
+          className="h-[450px] w-full rounded-lg bg-white p-4 shadow-lg dark:shadow-none"
           src={stockChartUrl}
         ></iframe>
       </div>
