@@ -37,7 +37,7 @@ export default function HomeLayout({
       <div className="z-10 h-fit min-h-[70svh] w-full max-w-6xl">
         {children}
       </div>
-      <div className="z-10 flex w-full max-w-6xl p-5">
+      <div className="z-10 flex w-full max-w-6xl pb-6 pt-20">
         <div className="m-auto">
           <Copyright />
         </div>
