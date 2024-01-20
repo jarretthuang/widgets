@@ -1,6 +1,7 @@
 import HomeLayout from "@/components/HomeLayout";
 import type { Metadata } from "next";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -11,34 +12,45 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <HomeLayout>
-      <div className="flex h-[70svh] w-full overflow-hidden">
-        <div className="m-auto flex w-full flex-col items-center justify-center">
-          <a
-            href="/finance"
-            className="dark:border-1 flex h-40 w-40 rotate-[15deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 hover:bg-lime-100/70 md:h-80 md:w-80 dark:border-stone-500/80 dark:bg-black/40 dark:hover:bg-black/30"
-          >
-            <div className="m-auto text-3xl">
-              <MonetizationOnIcon fontSize="large" />
-              <div>Finance</div>
-            </div>
-          </a>
-          <div className="pointer-events-none relative inline-flex w-full select-none items-center justify-center pt-24 text-xl md:text-2xl">
-            <span className="pl-2 md:px-1">Optimized for</span>
-            <Image
-              src="/notion.png"
-              alt="Notion"
-              className="p-2 md:p-1"
-              width={40}
-              height={40}
-            />
-            <Image
-              src="/branch.svg"
-              alt="Notion"
-              className="absolute p-6 opacity-70 md:p-0 dark:opacity-100 dark:invert"
-              width={300}
-              height={200}
-            />
+      <div className="flex h-[80svh] w-full flex-col items-center overflow-hidden">
+        <div className="flex w-full flex-1 flex-col items-center justify-center">
+          <div className="relative [&>a]:h-40 [&>a]:w-40 ">
+            <a
+              href="/finance"
+              className="dark:border-1 absolute left-[-12rem] top-[-8rem] flex rotate-[-20deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 hover:bg-lime-100/70 dark:border-stone-500/80 dark:bg-black/40 dark:hover:bg-black/30"
+            >
+              <div className="m-auto text-3xl">
+                <MonetizationOnIcon fontSize="large" />
+                <div>Finance</div>
+              </div>
+            </a>
+            <a
+              href="/"
+              className="dark:border-1 absolute left-[2rem] flex rotate-[30deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 hover:bg-lime-100/70 dark:border-stone-500/80 dark:bg-black/40 dark:hover:bg-black/30"
+            >
+              <div className="m-auto text-3xl">
+                <AccessTimeFilledIcon fontSize="large" />
+                <div>Soon!</div>
+              </div>
+            </a>
           </div>
+        </div>
+        <div className="pointer-events-none relative inline-flex w-full select-none items-center justify-center py-24 text-xl md:text-2xl">
+          <span className="pl-2 md:px-1">Optimized for</span>
+          <Image
+            src="/notion.png"
+            alt="Notion"
+            className="p-2 md:p-1"
+            width={40}
+            height={40}
+          />
+          <Image
+            src="/branch.svg"
+            alt="Notion"
+            className="absolute p-6 opacity-70 md:p-0 dark:opacity-100 dark:invert"
+            width={300}
+            height={200}
+          />
         </div>
       </div>
     </HomeLayout>
