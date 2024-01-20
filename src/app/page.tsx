@@ -12,12 +12,12 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <HomeLayout>
-      <div className="flex h-[80svh] w-full flex-col items-center overflow-hidden">
-        <div className="flex w-full flex-1 flex-col items-center justify-center">
-          <div className="relative [&>a]:h-40 [&>a]:w-40 ">
+      <div className="flex min-h-[80svh] w-full flex-col items-center overflow-hidden">
+        <div className="flex min-h-[60svh] w-full flex-1 flex-col items-center justify-center">
+          <div className="relative pb-20 [&>a]:h-40 [&>a]:w-40">
             <a
               href="/finance"
-              className="dark:border-1 absolute left-[-12rem] top-[-8rem] flex rotate-[-20deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 hover:bg-lime-100/70 dark:border-stone-500/80 dark:bg-black/40 dark:hover:bg-black/30"
+              className="dark:border-1 absolute left-[-5rem] top-[-8rem] flex rotate-[-20deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 hover:bg-lime-100/70 md:left-[-12rem] dark:border-stone-500/80 dark:bg-black/40 dark:hover:bg-black/30"
             >
               <div className="m-auto text-3xl">
                 <MonetizationOnIcon fontSize="large" />
@@ -26,7 +26,7 @@ export default function Home() {
             </a>
             <a
               href="/"
-              className="dark:border-1 absolute left-[2rem] flex rotate-[30deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 hover:bg-lime-100/70 dark:border-stone-500/80 dark:bg-black/40 dark:hover:bg-black/30"
+              className="dark:border-1 absolute left-[-5rem] top-[5rem] flex rotate-[30deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 hover:bg-lime-100/70 md:left-[2rem] dark:border-stone-500/80 dark:bg-black/40 dark:hover:bg-black/30"
             >
               <div className="m-auto text-3xl">
                 <AccessTimeFilledIcon fontSize="large" />
