@@ -12,6 +12,7 @@
   }
 
   .simple-gradient {
+    filter: blur(100px) saturate(150%);
     @apply bg-gradient-to-br from-emerald-100 to-cyan-100;
   }
 }

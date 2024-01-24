@@ -14,10 +14,10 @@ export default function HomeLayout({
 }) {
   return (
     <main
-      className={`${pacifico.className} relative flex h-fit min-h-svh flex-col items-center justify-between p-6 text-slate-700  dark:text-slate-100`}
+      className={`${pacifico.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-6  text-slate-700 dark:bg-black dark:text-slate-100`}
     >
       <div
-        className={`simple-gradient dark:diverse-gradient absolute bottom-0 left-0 right-0 top-0 z-0 h-full w-full dark:opacity-40`}
+        className={`simple-gradient dark:diverse-gradient left-1/5 top-1/5 absolute z-0 h-4/5 w-4/5 dark:opacity-40`}
       ></div>
       <div className="z-10 flex w-full max-w-6xl select-none flex-row content-center pb-5">
         <Image
