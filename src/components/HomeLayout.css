@@ -1,6 +1,6 @@
 @tailwind components;
 @layer components {
   .simple-gradient {
-    @apply bg-gradient-to-br from-emerald-100 to-pink-50 dark:from-cyan-950 dark:to-stone-900;
+    @apply bg-gradient-to-br from-emerald-100 to-pink-50 dark:from-cyan-950/50 dark:to-stone-900/50;
   }
 }
