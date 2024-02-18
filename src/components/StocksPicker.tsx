@@ -82,35 +82,37 @@ export default function StocksPicker() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col gap-6">
-      <div className="py-2 text-3xl">
+    <>
+      <div className="px-1 py-6 text-3xl md:py-4">
         <span className="pr-2 font-semibold">Stocks</span>
       </div>
-      <div className="flex w-full flex-col gap-2 whitespace-nowrap rounded-lg border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
-        <span className="pb-2 text-lg font-medium">Stock Symbol</span>
-        <input
-          type="text"
-          placeholder="Stock Symbol"
-          className="input w-full rounded-lg border border-stone-400 bg-white  bg-white/0 p-2 focus:border-stone-800 focus:outline-none md:w-72 dark:border-stone-700 dark:focus:border-gray-600"
-          value={stockSymbol}
-          onChange={(e) => updateStockSymbolWithDefault(e.target.value)}
-        />
-        <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
-          {presetStocks.map((stock) => (
-            <div
-              key={stock.symbol}
-              className="rounded border  bg-lime-50/80 px-2 py-1 font-medium active:bg-lime-100/70 data-[selected=true]:bg-lime-100/70 hover:bg-lime-100/70 dark:border-stone-700 dark:bg-stone-800 dark:active:bg-stone-900 dark:data-[selected=true]:bg-stone-900 dark:hover:bg-stone-900"
-              data-selected={debouncedStockSymbol === stock.symbol}
-              onClick={() => updateStockSymbolWithDefault(stock.symbol)}
-            >
-              {stock.displayName}
-            </div>
-          ))}
+      <div className="flex h-full w-full flex-col gap-16 md:gap-8">
+        <div className="flex w-full flex-col gap-2 whitespace-nowrap rounded-lg border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
+          <span className="pb-2 text-lg font-medium">Stock Symbol</span>
+          <input
+            type="text"
+            placeholder="Stock Symbol"
+            className="input w-full rounded-lg border border-stone-400 bg-white  bg-white/0 p-2 focus:border-stone-800 focus:outline-none md:w-72 dark:border-stone-700 dark:focus:border-gray-600"
+            value={stockSymbol}
+            onChange={(e) => updateStockSymbolWithDefault(e.target.value)}
+          />
+          <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
+            {presetStocks.map((stock) => (
+              <div
+                key={stock.symbol}
+                className="rounded border  bg-lime-50/80 px-2 py-1 font-medium active:bg-lime-100/70 data-[selected=true]:bg-lime-100/70 hover:bg-lime-100/70 dark:border-stone-700 dark:bg-stone-800 dark:active:bg-stone-900 dark:data-[selected=true]:bg-stone-900 dark:hover:bg-stone-900"
+                data-selected={debouncedStockSymbol === stock.symbol}
+                onClick={() => updateStockSymbolWithDefault(stock.symbol)}
+              >
+                {stock.displayName}
+              </div>
+            ))}
+          </div>
+          <span className="pb-2 text-lg font-medium">Theme</span>
+          {renderThemeToggle()}
         </div>
-        <span className="pb-2 text-lg font-medium">Theme</span>
-        {renderThemeToggle()}
+        {renderStockChart()}
       </div>
-      {renderStockChart()}
-    </div>
+    </>
   );
 }

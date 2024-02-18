@@ -19,7 +19,7 @@ export default function HomeLayout({
       <div
         className={`simple-gradient absolute left-0 top-0 z-0 h-full w-full dark:opacity-50 `}
       ></div>
-      <div className="z-10 flex w-full max-w-6xl select-none flex-row content-center pb-5">
+      <div className="z-10 flex w-full max-w-6xl select-none flex-row content-center py-10 md:py-5">
         <Image
           src="/favicon.ico"
           alt="Logo"
