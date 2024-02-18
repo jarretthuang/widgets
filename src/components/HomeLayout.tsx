@@ -14,7 +14,7 @@ export default function HomeLayout({
 }) {
   return (
     <main
-      className={`${pacifico.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-6  text-slate-700 dark:bg-stone-950 dark:text-slate-100`}
+      className={`${pacifico.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-3  text-slate-700 md:p-6 dark:bg-stone-950 dark:text-slate-100`}
     >
       <div
         className={`simple-gradient absolute left-0 top-0 z-0 h-full w-full dark:opacity-50 `}

@@ -56,37 +56,37 @@ export default function StocksPicker() {
         </Switch>
       );
     }
-  }
+  };
 
   const renderStockChart = () => {
     if (hasLoaded) {
       return (
-        <div className="flex-1 rounded-lg border bg-white/50 px-8 py-6 shadow-lg dark:border-stone-700 dark:bg-stone-950/50">
-        <div className="flex items-center whitespace-nowrap pb-2 text-lg">
-          <span className="pr-2 font-medium">Live Chart</span>
-          <a
-            className="cursor-pointer hover:opacity-80"
-            href={stockChartUrl}
-            target="_blank"
-          >
-            <LinkIcon fontSize="large" />
-          </a>
+        <div className="flex-1 rounded-lg border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
+          <div className="flex items-center whitespace-nowrap pb-2 text-lg">
+            <span className="pr-2 font-medium">Live Chart</span>
+            <a
+              className="cursor-pointer hover:opacity-80"
+              href={stockChartUrl}
+              target="_blank"
+            >
+              <LinkIcon fontSize="large" />
+            </a>
+          </div>
+          <iframe
+            className="mb-4 h-[450px] w-full rounded-lg border bg-transparent p-1 md:p-4 dark:border-stone-700"
+            src={stockChartUrl}
+          ></iframe>
         </div>
-        <iframe
-          className="mb-4 h-[450px] w-full rounded-lg border bg-transparent p-4 dark:border-stone-700"
-          src={stockChartUrl}
-        ></iframe>
-      </div>
       );
     }
-  }
+  };
 
   return (
     <div className="flex h-full w-full flex-col gap-6">
       <div className="py-2 text-3xl">
         <span className="pr-2 font-semibold">Stocks</span>
       </div>
-      <div className="flex w-full flex-col gap-2 whitespace-nowrap rounded-lg border bg-white/50 px-8 py-6 shadow-lg dark:border-stone-700 dark:bg-stone-950/50">
+      <div className="flex w-full flex-col gap-2 whitespace-nowrap rounded-lg border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
         <span className="pb-2 text-lg font-medium">Stock Symbol</span>
         <input
           type="text"
