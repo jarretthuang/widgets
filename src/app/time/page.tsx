@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function Time() {
   return (
-    <HomeLayout title="Time">
+    <HomeLayout title="timepiece">
       <div>Time</div>
     </HomeLayout>
   );
