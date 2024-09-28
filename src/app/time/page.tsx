@@ -1,5 +1,5 @@
 import HomeLayout from "@/components/HomeLayout";
-import Timer from "@/components/client/Timer";
+import Countdown from "@/components/client/Countdown";
 import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Widgets | Time",
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function Time() {
   return (
-    <HomeLayout title="timepiece">
-      <Timer />
+    <HomeLayout title="time">
+      <Countdown />
     </HomeLayout>
   );
 }

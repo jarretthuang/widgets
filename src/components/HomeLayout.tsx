@@ -1,9 +1,20 @@
 import Image from "next/image";
-import { Exo } from "next/font/google";
+import { Merriweather_Sans } from "next/font/google";
 import Copyright from "./Copyright";
 import "./HomeLayout.css";
+import React from "react";
 
-const pacifico = Exo({ subsets: ["latin"] });
+const font = Merriweather_Sans({
+  subsets: ["latin"],
+  weight: [
+    "300",
+    "400",
+    "500",
+    "600",
+    "700",
+    "800",
+  ],
+});
 
 export default function HomeLayout({
   children,
@@ -14,7 +25,7 @@ export default function HomeLayout({
 }) {
   return (
     <main
-      className={`${pacifico.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-3  text-slate-700 md:p-6 dark:bg-stone-950 dark:text-slate-100`}
+      className={`${font.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-3  text-slate-700 md:p-6 dark:bg-stone-950 dark:text-slate-100`}
     >
       <div
         className={`simple-gradient absolute left-0 top-0 z-0 h-full w-full dark:opacity-50 `}

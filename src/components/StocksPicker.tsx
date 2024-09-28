@@ -18,6 +18,7 @@ export default function StocksPicker() {
   const [debouncedStockSymbol] = useDebounce(stockSymbol, 500);
   const [useDarkMode, setUseDarkMode] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [showPing, setShowPing] = useState(true);
 
   const theme = useDarkMode ? "dark" : "light";
   const stockChartUrl = `/finance/stocks?symbol=${debouncedStockSymbol}&theme=${theme}`;
@@ -62,16 +63,26 @@ export default function StocksPicker() {
     if (hasLoaded) {
       return (
         <div className="flex-1 rounded-lg border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
-          <div className="flex items-center whitespace-nowrap pb-2 text-lg">
-            <span className="pr-2 font-medium">Live Chart</span>
+          <h2 className="flex items-center whitespace-nowrap gap-2 relative w-fit">
+            <span>Widget</span>
             <a
               className="cursor-pointer hover:opacity-80"
               href={stockChartUrl}
               target="_blank"
+              rel="noreferrer"
+              onClick={() => setShowPing(false)}
             >
               <LinkIcon fontSize="large" />
             </a>
-          </div>
+            {
+              showPing && (
+                <span className="absolute right-[-1rem] top-4 flex h-3 w-3">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-300 opacity-75 dark:bg-slate-100"></span>
+                    <span className="relative inline-flex h-3 w-3 rounded-full bg-orange-400 dark:bg-slate-200"></span>
+                  </span>
+              )
+            }
+          </h2>
           <iframe
             className="mb-4 h-[450px] w-full rounded-lg border bg-transparent p-1 md:p-4 dark:border-stone-700"
             src={stockChartUrl}
@@ -83,12 +94,12 @@ export default function StocksPicker() {
 
   return (
     <>
-      <div className="px-1 py-6 text-3xl md:py-4">
-        <span className="pr-2 font-semibold">Stocks</span>
-      </div>
+      <h1 className="px-1">Stocks</h1>
       <div className="flex h-full w-full flex-col gap-16 md:gap-8">
-        <div className="flex w-full flex-col gap-2 whitespace-nowrap rounded-lg border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
-          <span className="pb-2 text-lg font-medium">Stock Symbol</span>
+        <section
+          className="">
+          <h2>Configurations</h2>
+          <h3>Stock Symbol</h3>
           <input
             type="text"
             placeholder="Stock Symbol"
@@ -100,7 +111,7 @@ export default function StocksPicker() {
             {presetStocks.map((stock) => (
               <div
                 key={stock.symbol}
-                className="rounded border  bg-lime-50/80 px-2 py-1 font-medium active:bg-lime-100/70 data-[selected=true]:bg-lime-100/70 hover:bg-lime-100/70 dark:border-stone-700 dark:bg-stone-800 dark:active:bg-stone-900 dark:data-[selected=true]:bg-stone-900 dark:hover:bg-stone-900"
+                className="rounded-lg border border-gray-300 bg-green-100 active:bg-green-50 hover:bg-green-50 px-2 py-1 font-medium data-[selected=true]:bg-green-50 dark:border-stone-700 dark:bg-stone-800 dark:data-[selected=true]:bg-stone-700 dark:hover:bg-stone-700 dark:active:bg-stone-700"
                 data-selected={debouncedStockSymbol === stock.symbol}
                 onClick={() => updateStockSymbolWithDefault(stock.symbol)}
               >
@@ -108,9 +119,9 @@ export default function StocksPicker() {
               </div>
             ))}
           </div>
-          <span className="pb-2 text-lg font-medium">Theme</span>
+          <h3>Theme</h3>
           {renderThemeToggle()}
-        </div>
+        </section>
         {renderStockChart()}
       </div>
     </>

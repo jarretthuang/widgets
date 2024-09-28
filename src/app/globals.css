@@ -13,3 +13,22 @@
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold py-6 md:py-4;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold py-4 md:py-3;
+  }
+
+  h3 {
+    @apply text-xl font-medium py-3 md:py-2;
+  }
+
+  section {
+    @apply flex w-full flex-col gap-2 whitespace-nowrap rounded-lg border border-stone-300 px-3 py-4 md:px-8 md:py-6 dark:border-stone-700;
+  }
+}
