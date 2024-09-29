@@ -4,7 +4,6 @@
 
 * {
   box-sizing: border-box;
-  @apply dark:[color-scheme:dark];
 }
 
 :root {

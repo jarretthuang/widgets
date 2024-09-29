@@ -21,8 +21,9 @@ export async function generateMetadata(
 
 export default function CountdownPage({ params, searchParams }: Props) {
   const till = parseDate(searchParams["till"]);
+  const description = searchParams["description"];
   return (
-    <CountdownWidget date={till} />
+    <CountdownWidget date={till} description={description} />
   );
 }
 

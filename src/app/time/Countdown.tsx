@@ -6,7 +6,8 @@ import WidgetCard from "@/components/WidgetCard";
 
 export default function Countdown() {
   const [date, setDate] = useState<Date>(new Date());
-  const countdownWidgetUrl = `/time/countdown?till=${date.getTime()}`;
+  const [description, setDescription] = useState<string>("");
+  const countdownWidgetUrl = `/time/countdown?till=${date.getTime()}&description=${description}`;
 
   return (
     <div className="flex h-full w-full flex-col gap-16 md:gap-8">
@@ -15,6 +16,8 @@ export default function Countdown() {
         <h2>Configurations</h2>
         <h3>Target Date</h3>
         <Datepicker className="max-w-56" defaultDate={date} onSelectedDateChanged={setDate}/>
+        <h3>Description</h3>
+        <input type="text" className="w-full p-2 border border-gray-300 rounded-md" placeholder="Optional description" onChange={e => setDescription(e.target.value)}/>
       </section>
       <WidgetCard widgetUrl={countdownWidgetUrl}/>
     </div>
