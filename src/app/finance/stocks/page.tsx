@@ -1,4 +1,4 @@
-import Chart from "@/components/Chart";
+import StockChart from "@/app/finance/stocks/StockChart";
 
 import type { Metadata, ResolvingMetadata } from "next";
 
@@ -20,7 +20,7 @@ export async function generateMetadata(
   };
 }
 
-export default function Stocks({ params, searchParams }: Props) {
+export default function StocksPage({ params, searchParams }: Props) {
   const stockSymbol = searchParams["symbol"] ?? "AMEX:VOO";
   const height = searchParams["height"] ?? "400";
   const allowChange: boolean = searchParams["allowChange"] === "true";
@@ -28,12 +28,12 @@ export default function Stocks({ params, searchParams }: Props) {
 
   return (
     <>
-      <Chart
+      <StockChart
         stockSymbol={stockSymbol}
         height={height}
         allowChange={allowChange}
         theme={theme}
-      ></Chart>
+      ></StockChart>
     </>
   );
 }

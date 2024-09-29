@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import Script from "next/script";
 
-function Chart({
+function StockChart({
   stockSymbol,
   height,
   allowChange,
@@ -38,4 +38,4 @@ function Chart({
   );
 }
 
-export default memo(Chart);
+export default memo(StockChart);
