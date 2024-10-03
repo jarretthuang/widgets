@@ -21,10 +21,6 @@ export default function Stocks() {
 
   const theme = useDarkMode ? "dark" : "light";
   const stockChartUrl = `/finance/stocks?symbol=${debouncedStockSymbol}&theme=${theme}`;
-  const updateStockSymbolWithDefault = (symbol: string) => {
-    const symbolOrDefault = symbol ? symbol : "SPX500";
-    updateStockSymbol(symbolOrDefault);
-  };
 
   const presetStocks = [
     PresetStock("SPX500", "🇺🇸 S&P 500"),
@@ -62,8 +58,7 @@ export default function Stocks() {
     <>
       <h1 className="px-1">Stocks</h1>
       <div className="flex h-full w-full flex-col gap-16 md:gap-8">
-        <section
-          className="">
+        <section>
           <h2>Configurations</h2>
           <h3>Stock Symbol</h3>
           <input
@@ -71,15 +66,15 @@ export default function Stocks() {
             placeholder="Stock Symbol"
             className="input w-full rounded-lg border border-stone-400 bg-white  bg-white/0 p-2 focus:border-stone-800 focus:outline-none md:w-72 dark:border-stone-700 dark:focus:border-gray-600"
             value={stockSymbol}
-            onChange={(e) => updateStockSymbolWithDefault(e.target.value)}
+            onChange={(e) => updateStockSymbol(e.target.value)}
           />
           <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
             {presetStocks.map((stock) => (
               <div
                 key={stock.symbol}
-                className="rounded-lg border border-gray-300 bg-green-100 active:bg-green-50 hover:bg-green-50 px-2 py-1 font-medium data-[selected=true]:bg-green-50 dark:border-stone-700 dark:bg-stone-800 dark:data-[selected=true]:bg-stone-700 dark:hover:bg-stone-700 dark:active:bg-stone-700"
+                className="rounded-lg border border-gray-300 bg-green-100 px-2 py-1 font-medium active:bg-green-50 data-[selected=true]:bg-green-50 hover:bg-green-50 dark:border-stone-700 dark:bg-stone-800 dark:active:bg-stone-700 dark:data-[selected=true]:bg-stone-700 dark:hover:bg-stone-700"
                 data-selected={debouncedStockSymbol === stock.symbol}
-                onClick={() => updateStockSymbolWithDefault(stock.symbol)}
+                onClick={() => updateStockSymbol(stock.symbol)}
               >
                 {stock.displayName}
               </div>
