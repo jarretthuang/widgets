@@ -7,7 +7,7 @@ export default function CountdownWidget( { date, description }: { date: Date | u
   const render = () => {
     if (daysRemaining !== undefined) {
       return (
-        <div className="m-auto flex flex-col items-center gap-2 p-8 border-2 rounded-xl">
+        <div className="m-auto flex flex-col items-center gap-2 p-8 border-2 rounded-xl dark:text-slate-100">
           <div>
             <span className="text-6xl pl-4">{`${Math.abs(daysRemaining)}`}</span>
             <span className="text-sm">{`day${Math.abs(daysRemaining) !== 1 ? "s" : ""}`}</span>
