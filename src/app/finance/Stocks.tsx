@@ -41,7 +41,7 @@ export default function Stocks() {
     if (hasLoaded) {
       return (
         <Switch
-          className="group flex cursor-pointer select-none items-center gap-2"
+          className="group flex w-min cursor-pointer select-none items-center gap-2"
           isSelected={useDarkMode}
           onChange={setUseDarkMode}
         >
