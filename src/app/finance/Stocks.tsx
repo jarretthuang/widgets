@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { Switch } from "react-aria-components";
 import WidgetCard from "@/components/WidgetCard";
+import Input from "@/components/Input";
 
 type PresetStock = {
   symbol: string;
@@ -61,13 +62,12 @@ export default function Stocks() {
         <section>
           <h2>Configurations</h2>
           <h3>Stock Symbol</h3>
-          <input
-            type="text"
+          <Input
+            className="md:w-72"
             placeholder="Stock Symbol"
-            className="input w-full rounded-lg border border-stone-400 bg-white  bg-white/0 p-2 focus:border-stone-800 focus:outline-none md:w-72 dark:border-stone-700 dark:focus:border-gray-600"
             value={stockSymbol}
-            onChange={(e) => updateStockSymbol(e.target.value)}
-          />
+            onChange={updateStockSymbol}
+          ></Input>
           <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
             {presetStocks.map((stock) => (
               <div

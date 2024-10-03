@@ -4,6 +4,7 @@
 
 * {
   box-sizing: border-box;
+  --tw-ring-color: transparent !important;
 }
 
 :root {
@@ -13,18 +14,17 @@
   text-rendering: optimizeLegibility;
 }
 
-
 @layer base {
   h1 {
-    @apply text-3xl font-bold py-6 md:py-4;
+    @apply py-6 text-3xl font-bold md:py-4;
   }
 
   h2 {
-    @apply text-2xl font-semibold py-4 md:py-3;
+    @apply py-4 text-2xl font-semibold md:py-3;
   }
 
   h3 {
-    @apply text-xl font-medium py-3 md:py-2;
+    @apply py-3 text-xl font-medium md:py-2;
   }
 
   section {

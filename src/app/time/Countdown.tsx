@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import { Datepicker } from "flowbite-react";
 import WidgetCard from "@/components/WidgetCard";
+import Input from "@/components/Input";
 
 export default function Countdown() {
   const [date, setDate] = useState<Date>(new Date());
@@ -27,12 +28,11 @@ export default function Countdown() {
           onSelectedDateChanged={setDate}
         />
         <h3>Description</h3>
-        <input
-          type="text"
-          className="w-full rounded-md border border-gray-300 p-2 dark:text-slate-700"
+        <Input
           placeholder="Optional description"
-          onChange={(e) => setDescription(e.target.value)}
-        />
+          value={description}
+          onChange={setDescription}
+        ></Input>
       </section>
       <WidgetCard widgetUrl={countdownWidgetUrl} />
     </div>
