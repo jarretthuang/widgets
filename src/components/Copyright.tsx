@@ -9,7 +9,7 @@ export default function Copyright() {
         <span className="px-2"> © {currentYear} </span>
         <a
           className="hover:opacity-80"
-          href="https://labs.jhuang.ca"
+          href="https://jhuang.ca"
           target="_blank"
         >
           <span className="hidden md:inline">Jarrett Huang</span>
