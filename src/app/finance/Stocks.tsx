@@ -2,17 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { Switch } from "react-aria-components";
-import WidgetCard from "@/components/WidgetCard";
 import Input from "@/components/Input";
-
-type PresetStock = {
-  symbol: string;
-  displayName: string;
-};
-
-function PresetStock(symbol: string, displayName: string): PresetStock {
-  return { symbol, displayName };
-}
+import StockPresets from "./StockPresets";
+import WidgetCard from "@/components/WidgetCard";
 
 export default function Stocks() {
   const [stockSymbol, updateStockSymbol] = useState("SPX500");
@@ -22,14 +14,6 @@ export default function Stocks() {
 
   const theme = useDarkMode ? "dark" : "light";
   const stockChartUrl = `/finance/stocks?symbol=${debouncedStockSymbol}&theme=${theme}`;
-
-  const presetStocks = [
-    PresetStock("SPX500", "🇺🇸 S&P 500"),
-    PresetStock("AAPL", "🇺🇸 Apple"),
-    PresetStock("TSLA", "🇺🇸 Tesla"),
-    PresetStock("TSX", "🇨🇦 Toronto"),
-    PresetStock("399001", "🇨🇳 Shenzhen"),
-  ];
 
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -61,25 +45,17 @@ export default function Stocks() {
       <div className="flex h-full w-full flex-col gap-16 md:gap-8">
         <section>
           <h2>Configurations</h2>
-          <h3>Stock Symbol</h3>
+          <h3>Stock (Asset) Symbol</h3>
           <Input
             className="md:w-72"
-            placeholder="Stock Symbol"
+            placeholder="e.g. SPX500, AAPL"
             value={stockSymbol}
             onChange={updateStockSymbol}
           ></Input>
-          <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
-            {presetStocks.map((stock) => (
-              <div
-                key={stock.symbol}
-                className="rounded-lg border border-gray-300 bg-green-100 px-2 py-1 font-medium active:bg-green-50 data-[selected=true]:bg-green-50 hover:bg-green-50 dark:border-stone-700 dark:bg-stone-800 dark:active:bg-stone-700 dark:data-[selected=true]:bg-stone-700 dark:hover:bg-stone-700"
-                data-selected={debouncedStockSymbol === stock.symbol}
-                onClick={() => updateStockSymbol(stock.symbol)}
-              >
-                {stock.displayName}
-              </div>
-            ))}
-          </div>
+          <StockPresets
+            currentSymbol={debouncedStockSymbol}
+            onSelect={updateStockSymbol}
+          />
           <h3>Theme</h3>
           {renderThemeToggle()}
         </section>
