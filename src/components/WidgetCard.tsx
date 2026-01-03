@@ -2,7 +2,7 @@
 import LinkIcon from "@mui/icons-material/Link";
 import { useEffect, useState } from "react";
 
-export default function WidgetCard({ widgetUrl } : { widgetUrl: string }) {
+export default function WidgetCard({ widgetUrl }: { widgetUrl: string }) {
   const [showPing, setShowPing] = useState(true);
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -32,17 +32,17 @@ export default function WidgetCard({ widgetUrl } : { widgetUrl: string }) {
         {
           showPing && (
             <span className="absolute right-[-1rem] top-4 flex h-3 w-3">
-                    <span
-                      className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-300 opacity-75 dark:bg-slate-100"></span>
-                    <span className="relative inline-flex h-3 w-3 rounded-full bg-orange-400 dark:bg-slate-200"></span>
-                  </span>
+              <span
+                className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-300 opacity-75 dark:bg-slate-100"></span>
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-orange-400 dark:bg-slate-200"></span>
+            </span>
           )
         }
       </h2>
       {
         hasLoaded && (
           <iframe
-            className="mb-4 h-[450px] w-full rounded-2xl border bg-transparent p-1 md:p-4 dark:border-stone-700"
+            className="mb-4 h-[445px] w-full rounded-2xl border bg-transparent py-4 px-2 md:py-5 md:px-5 dark:border-stone-700"
             src={widgetUrl}
           ></iframe>
         )
