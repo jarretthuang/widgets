@@ -17,7 +17,7 @@ export default function Home() {
           <div className="relative pb-20 [&>a]:h-40 [&>a]:w-40">
             <a
               href="/finance"
-              className="dark:border-1 absolute left-[-5rem] top-[-8rem] flex rotate-[-20deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 active:bg-lime-100/70 hover:bg-lime-100/70 md:left-[-12rem] dark:border-stone-500/80 dark:bg-teal-700 dark:active:bg-teal-600 dark:hover:bg-teal-600"
+              className="dark:border-1 absolute left-[-5rem] top-[-8rem] flex rotate-[-20deg] cursor-pointer select-none rounded-xl bg-lime-50/40 shadow-lg backdrop-blur duration-100 active:bg-lime-50/70 hover:bg-lime-50/70 md:left-[-12rem] dark:border-stone-500/80 dark:bg-teal-700 dark:active:bg-teal-600 dark:hover:bg-teal-600"
             >
               <div className="m-auto text-3xl">
                 <MonetizationOnIcon fontSize="large" />
@@ -26,7 +26,7 @@ export default function Home() {
             </a>
             <a
               href="/time"
-              className="dark:border-1 absolute left-[-5rem] top-[5rem] flex rotate-[30deg] cursor-pointer select-none rounded-xl bg-lime-100/40 shadow-lg backdrop-blur duration-100 active:bg-lime-100/70 hover:bg-lime-100/70 md:left-[2rem] dark:border-stone-500/80 dark:bg-teal-700 dark:active:bg-teal-600 dark:hover:bg-teal-600"
+              className="dark:border-1 absolute left-[-5rem] top-[5rem] flex rotate-[30deg] cursor-pointer select-none rounded-xl bg-lime-50/40 shadow-lg backdrop-blur duration-100 active:bg-lime-50/70 hover:bg-lime-50/70 md:left-[2rem] dark:border-stone-500/80 dark:bg-teal-700 dark:active:bg-teal-600 dark:hover:bg-teal-600"
             >
               <div className="m-auto text-3xl">
                 <AccessTimeFilledIcon fontSize="large" />

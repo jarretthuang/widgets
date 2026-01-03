@@ -12,7 +12,7 @@ export default function WidgetCard({ widgetUrl } : { widgetUrl: string }) {
 
   return (
     <div
-      className="flex-1 rounded-lg border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
+      className="flex-1 rounded-2xl border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
       <h2 className="flex items-center whitespace-nowrap gap-2 relative w-fit">
         <span>Widget</span>
         {
@@ -42,7 +42,7 @@ export default function WidgetCard({ widgetUrl } : { widgetUrl: string }) {
       {
         hasLoaded && (
           <iframe
-            className="mb-4 h-[450px] w-full rounded-lg border bg-transparent p-1 md:p-4 dark:border-stone-700"
+            className="mb-4 h-[450px] w-full rounded-2xl border bg-transparent p-1 md:p-4 dark:border-stone-700"
             src={widgetUrl}
           ></iframe>
         )

@@ -8,7 +8,19 @@ import Input from "@/components/Input";
 export default function Countdown() {
   const [date, setDate] = useState<Date>(new Date());
   const [description, setDescription] = useState<string>("");
-  const countdownWidgetUrl = `/time/countdown?till=${date.getTime()}&description=${description}`;
+  const [debouncedDescription, setDebouncedDescription] = useState<string>("");
+
+  React.useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedDescription(description);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [description]);
+
+  const countdownWidgetUrl = `/time/countdown?till=${date.getTime()}&description=${debouncedDescription}`;
 
   return (
     <div className="flex h-full w-full flex-col gap-16 md:gap-8">
