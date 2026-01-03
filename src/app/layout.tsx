@@ -1,5 +1,13 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: light)", color: "#d0faec" },
+  ],
+};
 
 export default function RootLayout({
   children,
@@ -8,12 +16,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <meta
-        name="theme-color"
-        media="(prefers-color-scheme: dark)"
-        content="#000000"
-      />
-      <meta name="theme-color" content="#d0faec" />
       <body>{children}</body>
       <Analytics />
     </html>
