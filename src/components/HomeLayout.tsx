@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Copyright from "./Copyright";
 import "./HomeLayout.css";
 import React from "react";
+import Link from "next/link";
 
 const font = Inter({
   subsets: ["latin"],
@@ -39,9 +40,9 @@ export default function HomeLayout({
           height={40}
         />
         <div className="inline whitespace-nowrap px-2 text-3xl font-semibold">
-          <a href="/" className="font-bold hover:opacity-80">
+          <Link href="/" className="font-bold hover:opacity-80">
             widgets
-          </a>
+          </Link>
           <span>{title && ` / ${title}`}</span>
         </div>
       </div>

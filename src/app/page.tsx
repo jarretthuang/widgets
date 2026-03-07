@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Widgets",
@@ -15,7 +16,7 @@ export default function Home() {
       <div className="flex min-h-[80svh] w-full flex-col items-center overflow-hidden">
         <div className="flex min-h-[60svh] w-full flex-1 flex-col items-center justify-center">
           <div className="relative pb-20 [&>a]:h-40 [&>a]:w-40">
-            <a
+            <Link
               href="/finance"
               className="dark:border-1 absolute left-[-5rem] top-[-8rem] flex rotate-[-20deg] cursor-pointer select-none rounded-xl bg-lime-50/40 shadow-lg backdrop-blur duration-100 active:bg-lime-50/70 hover:bg-lime-50/70 md:left-[-12rem] dark:border-stone-500/80 dark:bg-teal-700 dark:active:bg-teal-600 dark:hover:bg-teal-600"
             >
@@ -23,8 +24,8 @@ export default function Home() {
                 <MonetizationOnIcon fontSize="large" />
                 <div>Finance</div>
               </div>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/time"
               className="dark:border-1 absolute left-[-5rem] top-[5rem] flex rotate-[30deg] cursor-pointer select-none rounded-xl bg-lime-50/40 shadow-lg backdrop-blur duration-100 active:bg-lime-50/70 hover:bg-lime-50/70 md:left-[2rem] dark:border-stone-500/80 dark:bg-teal-700 dark:active:bg-teal-600 dark:hover:bg-teal-600"
             >
@@ -32,7 +33,7 @@ export default function Home() {
                 <AccessTimeFilledIcon fontSize="large" />
                 <div>Time</div>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="pointer-events-none relative inline-flex w-full select-none items-center justify-center py-24 text-xl md:text-2xl">
