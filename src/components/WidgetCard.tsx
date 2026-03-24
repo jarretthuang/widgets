@@ -8,7 +8,7 @@ export default function WidgetCard({ widgetUrl }: { widgetUrl: string }) {
 
   useEffect(() => {
     setHasLoaded(true);
-  });
+  }, []);
 
   return (
     <div
@@ -44,6 +44,8 @@ export default function WidgetCard({ widgetUrl }: { widgetUrl: string }) {
           <iframe
             className="mb-4 h-[445px] w-full rounded-2xl border bg-transparent py-4 px-2 md:py-5 md:px-5 dark:border-stone-700"
             src={widgetUrl}
+            title="Widget preview"
+            loading="lazy"
           ></iframe>
         )
       }
