@@ -16,13 +16,13 @@
 
 html,
 body {
-  background-color: white;
+  background-color: #d0faec;
 }
 
 @media (prefers-color-scheme: dark) {
   html,
   body {
-    background-color: black;
+    background-color: #0c0a09;
   }
 }
 
