@@ -2,6 +2,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "next-themes";
+import ThemeColorMetaSync from "@/components/ThemeColorMetaSync";
 
 const lightThemeColor = "#d0faec";
 const darkThemeColor = "#041c2b";
@@ -33,6 +34,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <ThemeColorMetaSync />
           {children}
         </ThemeProvider>
       </body>
