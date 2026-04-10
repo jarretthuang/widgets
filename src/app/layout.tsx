@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Viewport } from "next";
 
 const lightThemeColor = "#d0faec";
-const darkThemeColor = "#082f49";
+const darkThemeColor = "#041c2b";
 
 export const viewport: Viewport = {
   themeColor: [

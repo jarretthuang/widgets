@@ -25,7 +25,7 @@ export default function HomeLayout({
 }) {
   return (
     <main
-      className={`${font.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-4 text-slate-700 md:p-6 dark:bg-[#082f49] dark:text-slate-100`}
+      className={`${font.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-4 text-slate-700 md:p-6 dark:bg-[#041c2b] dark:text-slate-100`}
     >
       <div className="z-10 flex w-full max-w-6xl select-none flex-row content-center py-10 md:py-5">
         <Image

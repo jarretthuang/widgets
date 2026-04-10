@@ -22,7 +22,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --page-background: #082f49;
+    --page-background: #041c2b;
   }
 
   html,

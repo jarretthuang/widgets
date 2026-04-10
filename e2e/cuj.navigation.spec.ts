@@ -35,5 +35,5 @@ test("theme color matches the page background in light and dark mode", async ({
     page.locator(
       'meta[name="theme-color"][media="(prefers-color-scheme: dark)"]',
     ),
-  ).toHaveAttribute("content", "#082f49");
+  ).toHaveAttribute("content", "#041c2b");
 });
