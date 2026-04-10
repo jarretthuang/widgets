@@ -45,7 +45,7 @@ export default function ThemeToggle() {
       aria-label={`Theme: ${label}. Switch to ${nextTheme}.`}
       title={`Theme: ${label}`}
       onClick={() => setTheme(nextTheme)}
-      className="relative flex h-11 w-11 items-center justify-center rounded-full border border-transparent bg-transparent text-slate-500 transition-colors duration-150 hover:bg-white/30 hover:text-slate-700 active:scale-95 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-slate-100"
+      className="relative flex h-11 w-11 items-center justify-center rounded-full border border-transparent bg-transparent text-slate-500 transition-colors duration-150 hover:bg-slate-200/60 hover:text-slate-700 active:scale-95 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-slate-100"
     >
       {icon}
       {currentTheme === "system" && (
