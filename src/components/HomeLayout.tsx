@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Copyright from "./Copyright";
-import "./HomeLayout.css";
 import React from "react";
 import Link from "next/link";
 
@@ -26,11 +25,8 @@ export default function HomeLayout({
 }) {
   return (
     <main
-      className={`${font.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-4 text-slate-700 md:p-6 dark:bg-stone-950 dark:text-slate-100`}
+      className={`${font.className} relative flex h-fit min-h-svh flex-col items-center justify-between bg-[#d0faec] p-4 text-slate-700 md:p-6 dark:bg-[#082f49] dark:text-slate-100`}
     >
-      <div
-        className={`simple-gradient absolute left-0 top-0 z-0 h-full w-full dark:opacity-50 `}
-      ></div>
       <div className="z-10 flex w-full max-w-6xl select-none flex-row content-center py-10 md:py-5">
         <Image
           src="/favicon.ico"

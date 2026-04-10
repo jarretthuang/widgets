@@ -12,17 +12,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  --page-background: #d0faec;
 }
 
 html,
 body {
-  background-color: white;
+  background-color: var(--page-background);
 }
 
 @media (prefers-color-scheme: dark) {
+  :root {
+    --page-background: #082f49;
+  }
+
   html,
   body {
-    background-color: black;
+    background-color: var(--page-background);
   }
 }
 
