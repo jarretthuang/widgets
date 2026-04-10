@@ -1,9 +1,8 @@
 "use client";
 
-import { Monitor, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
-
 
 export default function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -29,17 +28,12 @@ export default function ThemeToggle() {
         : "System";
 
   const icon = useMemo(() => {
-    if (currentTheme === "system") {
-      return <Monitor className="h-4 w-4" />;
-    }
-
     return resolvedTheme === "dark" ? (
       <Moon className="h-4 w-4" />
     ) : (
       <Sun className="h-4 w-4" />
     );
-  }, [currentTheme, resolvedTheme]);
-
+  }, [resolvedTheme]);
 
   if (!mounted) {
     return <div className="h-9 w-9" aria-hidden="true" />;
@@ -51,9 +45,14 @@ export default function ThemeToggle() {
       aria-label={`Theme: ${label}. Switch to ${nextTheme}.`}
       title={`Theme: ${label}`}
       onClick={() => setTheme(nextTheme)}
-      className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-slate-700 shadow-lg backdrop-blur transition-all duration-150 hover:-translate-y-0.5 hover:bg-white/60 hover:shadow-xl active:translate-y-0 active:scale-95 dark:border-stone-500/70 dark:bg-stone-900/50 dark:text-slate-100 dark:hover:bg-stone-800/70"
+      className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-transparent bg-transparent text-slate-500 transition-colors duration-150 hover:bg-white/30 hover:text-slate-700 active:scale-95 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-slate-100"
     >
-      <span className="transition-transform duration-150 hover:rotate-6">{icon}</span>
+      {icon}
+      {currentTheme === "system" && (
+        <span className="absolute bottom-1.5 right-1.5 text-[10px] font-bold leading-none text-slate-500 dark:text-slate-300">
+          A
+        </span>
+      )}
     </button>
   );
 }
