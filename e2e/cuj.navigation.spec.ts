@@ -9,6 +9,30 @@ async function getThemeColor(
     .getAttribute("content");
 }
 
+async function expectThemeColors(
+  page: Parameters<typeof test>[0]["page"],
+  expected: {
+    light: string;
+    dark: string;
+    fallback?: string;
+  },
+) {
+  await expect(
+    page.locator('meta[name="theme-color"][media="(prefers-color-scheme: light)"]'),
+  ).toHaveAttribute("content", expected.light);
+
+  await expect(
+    page.locator('meta[name="theme-color"][media="(prefers-color-scheme: dark)"]'),
+  ).toHaveAttribute("content", expected.dark);
+
+  if (expected.fallback) {
+    await expect(page.locator('meta[name="theme-color"]:not([media])')).toHaveAttribute(
+      "content",
+      expected.fallback,
+    );
+  }
+}
+
 test("home navigation to finance works", async ({ page }) => {
   await page.goto("/");
 
@@ -34,17 +58,11 @@ test("theme color matches the page background in light and dark mode", async ({
 }) => {
   await page.goto("/");
 
-  await expect(
-    page.locator(
-      'meta[name="theme-color"][media="(prefers-color-scheme: light)"]',
-    ),
-  ).toHaveAttribute("content", "#d0faec");
-
-  await expect(
-    page.locator(
-      'meta[name="theme-color"][media="(prefers-color-scheme: dark)"]',
-    ),
-  ).toHaveAttribute("content", "#041c2b");
+  await expectThemeColors(page, {
+    light: "#d0faec",
+    dark: "#041c2b",
+    fallback: "#d0faec",
+  });
 });
 
 test("theme toggle cycles light, dark, and system", async ({ page }) => {
@@ -57,16 +75,26 @@ test("theme toggle cycles light, dark, and system", async ({ page }) => {
   await toggle.click();
   await expect(page.locator("html")).toHaveClass(/light/);
   await expect(toggle).toHaveAttribute("title", "Theme: Light");
-  await expect(await getThemeColor(page, "light")).toBe("#d0faec");
+  await expectThemeColors(page, {
+    light: "#d0faec",
+    dark: "#d0faec",
+  });
 
   await toggle.click();
   await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(toggle).toHaveAttribute("title", "Theme: Dark");
-  await expect(await getThemeColor(page, "dark")).toBe("#041c2b");
+  await expectThemeColors(page, {
+    light: "#041c2b",
+    dark: "#041c2b",
+  });
 
   await toggle.click();
   await expect(toggle).toHaveAttribute("title", "Theme: System");
 
   const systemThemeColor = await getThemeColor(page, "dark");
   expect(["#041c2b", "#d0faec"]).toContain(systemThemeColor);
+  await expectThemeColors(page, {
+    light: "#d0faec",
+    dark: "#041c2b",
+  });
 });

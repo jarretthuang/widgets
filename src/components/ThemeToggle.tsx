@@ -6,6 +6,40 @@ import { useEffect, useMemo, useState } from "react";
 
 const LIGHT_THEME_COLOR = "#d0faec";
 const DARK_THEME_COLOR = "#041c2b";
+const SYSTEM_THEME_COLORS = {
+  light: LIGHT_THEME_COLOR,
+  dark: DARK_THEME_COLOR,
+} as const;
+
+function syncThemeColorMetaTags(theme: string | undefined, resolvedTheme: string | undefined) {
+  const explicitTheme = theme === "light" || theme === "dark" ? theme : null;
+  const fallbackTheme = explicitTheme ?? (resolvedTheme === "dark" ? "dark" : "light");
+  const fallbackColor = SYSTEM_THEME_COLORS[fallbackTheme];
+  const themeColorMetas = document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]');
+
+  themeColorMetas.forEach((meta) => {
+    const media = meta.getAttribute("media");
+
+    if (!media) {
+      meta.setAttribute("content", fallbackColor);
+      return;
+    }
+
+    if (explicitTheme) {
+      meta.setAttribute("content", SYSTEM_THEME_COLORS[explicitTheme]);
+      return;
+    }
+
+    if (media.includes("prefers-color-scheme: dark")) {
+      meta.setAttribute("content", SYSTEM_THEME_COLORS.dark);
+      return;
+    }
+
+    if (media.includes("prefers-color-scheme: light")) {
+      meta.setAttribute("content", SYSTEM_THEME_COLORS.light);
+    }
+  });
+}
 
 export default function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -42,16 +76,11 @@ export default function ThemeToggle() {
     );
   }, [currentTheme, resolvedTheme]);
 
-  const themeColor = resolvedTheme === "dark" ? DARK_THEME_COLOR : LIGHT_THEME_COLOR;
-
   useEffect(() => {
     if (!mounted) return;
 
-    const themeColorMeta = document.querySelector('meta[name="theme-color"]:not([media])');
-    if (themeColorMeta) {
-      themeColorMeta.setAttribute("content", themeColor);
-    }
-  }, [mounted, themeColor]);
+    syncThemeColorMetaTags(theme, resolvedTheme);
+  }, [mounted, resolvedTheme, theme]);
 
   if (!mounted) {
     return <div className="h-9 w-9" aria-hidden="true" />;
