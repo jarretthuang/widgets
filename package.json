@@ -18,7 +18,9 @@
     "@vercel/analytics": "^1.1.1",
     "dayjs": "^1.11.13",
     "flowbite-react": "^0.10.1",
+    "lucide-react": "^1.8.0",
     "next": "^14.2.13",
+    "next-themes": "^0.4.6",
     "react": "^18",
     "react-aria-components": "^1.0.1",
     "react-dom": "^18",
@@ -37,6 +39,7 @@
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "yaml": "^2.8.3"
   }
 }

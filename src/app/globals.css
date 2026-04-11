@@ -15,19 +15,18 @@
   --page-background: #d0faec;
 }
 
+html.dark {
+  --page-background: #041c2b;
+}
+
 html,
 body {
   background-color: var(--page-background);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --page-background: #082f49;
-  }
-
-  html,
-  body {
-    background-color: var(--page-background);
+  html:not(.light) {
+    --page-background: #041c2b;
   }
 }
 
