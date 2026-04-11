@@ -49,7 +49,7 @@ export default function ThemeToggle() {
     >
       {icon}
       {currentTheme === "system" && (
-        <span className="absolute bottom-1.5 right-1.5 text-[10px] font-bold leading-none text-slate-500 dark:text-slate-300">
+        <span className="absolute bottom-2 right-2 text-[10px] font-bold leading-none text-slate-500 dark:text-slate-300">
           A
         </span>
       )}
