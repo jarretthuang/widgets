@@ -2,11 +2,12 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "next-themes";
-import ThemeColorMetaSync, {
+import ThemeColorMetaSync from "@/components/ThemeColorMetaSync";
+import {
   DARK_THEME_COLOR,
   LIGHT_THEME_COLOR,
   THEME_STORAGE_KEY,
-} from "@/components/ThemeColorMetaSync";
+} from "@/components/theme";
 
 const lightThemeColor = LIGHT_THEME_COLOR;
 const darkThemeColor = DARK_THEME_COLOR;
