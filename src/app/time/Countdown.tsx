@@ -36,8 +36,13 @@ export default function Countdown() {
         <h3>Target Date</h3>
         <Datepicker
           className="max-w-56"
-          defaultDate={date}
-          onSelectedDateChanged={setDate}
+          value={date}
+          onChange={(selectedDate) => {
+            if (selectedDate) {
+              setDate(selectedDate);
+            }
+          }}
+          showClearButton={false}
         />
         <h3>Description</h3>
         <Input
