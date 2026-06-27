@@ -61,7 +61,7 @@ export default function StockPresets({
   currentSymbol,
   onSelect,
 }: StockPresetsProps) {
-  const [isVisible, setIsVisible] = React.useState(true);
+  const [isVisible, setIsVisible] = React.useState(false);
 
   const renderCountryEmoji = (country?: Country) => {
     switch (country) {

@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { Switch } from "react-aria-components";
+import { useTheme } from "next-themes";
 import Input from "@/components/Input";
 import StockPresets from "./StockPresets";
 import WidgetCard from "@/components/WidgetCard";
 
 export default function Stocks() {
+  const { theme: appTheme, resolvedTheme } = useTheme();
   const [stockSymbol, updateStockSymbol] = useState("SPX500");
   const [debouncedStockSymbol] = useDebounce(stockSymbol, 500);
   const [useDarkMode, setUseDarkMode] = useState(false);
@@ -16,11 +18,14 @@ export default function Stocks() {
   const stockChartUrl = `/finance/stocks?symbol=${debouncedStockSymbol}&theme=${theme}`;
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setUseDarkMode(true);
-    }
     setHasLoaded(true);
   }, []);
+
+  useEffect(() => {
+    if (resolvedTheme === "dark" || resolvedTheme === "light") {
+      setUseDarkMode(resolvedTheme === "dark");
+    }
+  }, [appTheme, resolvedTheme]);
 
   const renderThemeToggle = () => {
     if (hasLoaded) {
