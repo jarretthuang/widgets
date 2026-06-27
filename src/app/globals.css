@@ -12,7 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  --page-background: #d0faec;
+  --page-background: #f8fafc;
 }
 
 html.dark {
