@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="90 50 420 455" role="img" aria-labelledby="title desc">
+  <title id="title">Widgets logo</title>
+  <desc id="desc">Two overlapping angled widget frames in navy and blue.</desc>
+  <defs>
+    <linearGradient id="navy" x1="130" x2="368" y1="396" y2="94" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07182c" />
+      <stop offset="1" stop-color="#132c4f" />
+    </linearGradient>
+    <linearGradient id="blue" x1="238" x2="484" y1="438" y2="178" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1682ff" />
+      <stop offset="1" stop-color="#2368ff" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M220 367l-61 19c-17 5-34-8-34-26V181c0-16 10-30 25-35l199-66c17-6 35 7 35 25v87"
+    fill="none"
+    stroke="url(#navy)"
+    stroke-linecap="butt"
+    stroke-linejoin="round"
+    stroke-width="42"
+  />
+  <path
+    d="M274 245l170-53c17-5 34 8 34 26v166c0 17-11 31-27 36l-170 53c-17 5-34-8-34-26V281c0-17 11-31 27-36z"
+    fill="none"
+    stroke="url(#blue)"
+    stroke-linejoin="round"
+    stroke-width="42"
+  />
+</svg>

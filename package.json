@@ -1,6 +1,6 @@
 {
   "name": "widgets",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,7 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:e2e": "playwright test"
+    "release:major": "npm version major",
+    "release:minor": "npm version minor",
+    "release:patch": "npm version patch",
+    "test:e2e": "playwright test",
+    "test:ci": "npm run test:e2e"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",

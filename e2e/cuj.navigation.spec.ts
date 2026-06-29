@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 const LIGHT_THEME_COLOR = "#f8fafc";
-const DARK_THEME_COLOR = "#041c2b";
+const DARK_THEME_COLOR = "#020617";
 
 async function getThemeColor(
   page: Parameters<typeof test>[0]["page"],

@@ -12,7 +12,7 @@ export default function WidgetCard({ widgetUrl }: { widgetUrl: string }) {
 
   return (
     <div
-      className="flex-1 rounded-2xl border bg-white/50 px-3 py-4 shadow-lg md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
+      className="flex-1 rounded-2xl border border-stone-300 bg-white/50 px-3 py-4 md:px-8 md:py-6 dark:border-stone-700 dark:bg-stone-950/50">
       <h2 className="flex items-center whitespace-nowrap gap-2 relative w-fit">
         <span>Widget</span>
         {

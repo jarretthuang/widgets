@@ -16,7 +16,7 @@
 }
 
 html.dark {
-  --page-background: #041c2b;
+  --page-background: #020617;
 }
 
 html,
@@ -26,7 +26,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   html:not(.light) {
-    --page-background: #041c2b;
+    --page-background: #020617;
   }
 }
 
