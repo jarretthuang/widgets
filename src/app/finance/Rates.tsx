@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import WidgetBuilderLayout from "@/components/WidgetBuilderLayout";
 import {
@@ -34,7 +34,6 @@ export default function Rates() {
   const [months, setMonths] = useState("60");
   const [useDarkMode, setUseDarkMode] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
-  const hasInitializedTheme = useRef(false);
 
   const theme = useDarkMode ? "dark" : "light";
   const ratesUrl = `/finance/rates?series=${seriesId}&months=${months}&theme=${theme}`;
@@ -45,12 +44,8 @@ export default function Rates() {
   }, []);
 
   useEffect(() => {
-    if (
-      !hasInitializedTheme.current &&
-      (resolvedTheme === "dark" || resolvedTheme === "light")
-    ) {
+    if (resolvedTheme === "dark" || resolvedTheme === "light") {
       setUseDarkMode(resolvedTheme === "dark");
-      hasInitializedTheme.current = true;
     }
   }, [resolvedTheme]);
 
