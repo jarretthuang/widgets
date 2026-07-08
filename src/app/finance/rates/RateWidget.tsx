@@ -153,8 +153,8 @@ function renderContent(data: RateData, theme: "dark" | "light") {
   if (data.status === "missing-key") {
     return (
       <WidgetMessage
-        title="FRED_API_KEY required"
-        body="Add a free FRED API key to your environment to load this widget."
+        title="Data unavailable"
+        body="This data is currently unavailable and cannot be displayed."
         theme={theme}
       />
     );
