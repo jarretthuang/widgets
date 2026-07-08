@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Switch } from "react-aria-components";
 import { useTheme } from "next-themes";
-import WidgetCard from "@/components/WidgetCard";
+import WidgetBuilderLayout from "@/components/WidgetBuilderLayout";
 import {
   DEFAULT_RATE_COUNTRY,
   DEFAULT_RATE_SERIES_ID,
@@ -11,6 +10,15 @@ import {
   type RateCountry,
   getRateSeriesForCountry,
 } from "@/app/finance/rates/series";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const rangeOptions = [
   { value: "12", label: "1Y" },
@@ -21,12 +29,8 @@ const rangeOptions = [
 
 export default function Rates() {
   const { theme: appTheme, resolvedTheme } = useTheme();
-  const [country, setCountry] = useState<RateCountry>(
-    DEFAULT_RATE_COUNTRY
-  );
-  const [seriesId, setSeriesId] = useState<string>(
-    DEFAULT_RATE_SERIES_ID
-  );
+  const [country, setCountry] = useState<RateCountry>(DEFAULT_RATE_COUNTRY);
+  const [seriesId, setSeriesId] = useState<string>(DEFAULT_RATE_SERIES_ID);
   const [months, setMonths] = useState("60");
   const [useDarkMode, setUseDarkMode] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -51,82 +55,70 @@ export default function Rates() {
     }
 
     return (
-      <Switch
-        className="group flex w-min cursor-pointer select-none items-center gap-2"
-        isSelected={useDarkMode}
-        onChange={setUseDarkMode}
-      >
-        <div className="box-border flex h-[26px] w-[44px] shrink-0 rounded-full border border-solid border-white/30 bg-stone-200/80 bg-clip-padding p-[3px] shadow-inner outline-none ring-black transition duration-200 ease-in-out group-focus-visible:ring-2 group-pressed:opacity-80 group-selected:bg-stone-700/50">
-          <span className="h-[18px] w-[18px] translate-x-0 transform rounded-full bg-white shadow transition duration-200 ease-in-out group-selected:translate-x-[100%] group-selected:border-stone-700 group-selected:bg-stone-900" />
-        </div>
+      <div className="flex w-fit select-none items-center gap-2 text-sm font-medium">
+        <Switch
+          aria-label={useDarkMode ? "Dark" : "Light"}
+          checked={useDarkMode}
+          onCheckedChange={setUseDarkMode}
+        />
         <span>{useDarkMode ? "Dark" : "Light"}</span>
-      </Switch>
+      </div>
     );
   };
 
   return (
-    <>
-      <h1 className="px-1">Rates</h1>
-      <div className="flex h-full w-full flex-col gap-16 md:gap-8">
-        <section>
-          <h2>Configurations</h2>
-          <h3>Country</h3>
-          <select
-            aria-label="Country"
-            className="w-full rounded-lg border border-stone-400 bg-white/0 p-2 focus:border-stone-800 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:focus:border-gray-600 md:w-72"
-            onChange={(event) => {
-              const nextCountry = event.target.value as RateCountry;
-              const nextCountrySeries =
-                getRateSeriesForCountry(nextCountry);
+    <WidgetBuilderLayout
+      title="Rates"
+      widgetIframeClassName="mb-0 h-[445px] px-0 py-0 md:px-0 md:py-0"
+      widgetUrl={ratesUrl}
+    >
+      <h3>Country</h3>
+      <Select
+        onValueChange={(value) => {
+          const nextCountry = value as RateCountry;
+          const nextCountrySeries = getRateSeriesForCountry(nextCountry);
 
-              setCountry(nextCountry);
-              setSeriesId(
-                nextCountrySeries[0]?.id ?? DEFAULT_RATE_SERIES_ID
-              );
-            }}
-            value={country}
-          >
-            {RATE_COUNTRIES.map((countryOption) => (
-              <option key={countryOption.value} value={countryOption.value}>
-                {countryOption.label}
-              </option>
-            ))}
-          </select>
-          <h3>Rate</h3>
-          <select
-            aria-label="Rate"
-            className="w-full rounded-lg border border-stone-400 bg-white/0 p-2 focus:border-stone-800 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:focus:border-gray-600 md:w-72"
-            onChange={(event) => setSeriesId(event.target.value)}
-            value={seriesId}
-          >
-            {countrySeries.map((series) => (
-              <option key={series.id} value={series.id}>
-                {series.label}
-              </option>
-            ))}
-          </select>
-          <h3>Range</h3>
-          <div className="flex flex-wrap gap-2">
-            {rangeOptions.map((range) => (
-              <button
-                className="rounded-lg border border-gray-300 bg-white px-3 py-2 font-medium active:bg-gray-50 data-[selected=true]:border-gray-400 data-[selected=true]:bg-gray-100 hover:border-gray-400 hover:bg-gray-50 dark:border-stone-700 dark:bg-stone-800 dark:active:bg-stone-700 dark:data-[selected=true]:bg-stone-700 dark:hover:bg-stone-700"
-                data-selected={months === range.value}
-                key={range.value}
-                onClick={() => setMonths(range.value)}
-                type="button"
-              >
-                {range.label}
-              </button>
-            ))}
-          </div>
-          <h3>Theme</h3>
-          {renderThemeToggle()}
-        </section>
-        <WidgetCard
-          iframeClassName="mb-0 h-[445px] px-0 py-0 md:px-0 md:py-0"
-          widgetUrl={ratesUrl}
-        />
-      </div>
-    </>
+          setCountry(nextCountry);
+          setSeriesId(nextCountrySeries[0]?.id ?? DEFAULT_RATE_SERIES_ID);
+        }}
+        value={country}
+      >
+        <SelectTrigger aria-label="Country" className="w-full md:w-72">
+          <SelectValue placeholder="Select a country" />
+        </SelectTrigger>
+        <SelectContent align="start">
+          {RATE_COUNTRIES.map((countryOption) => (
+            <SelectItem key={countryOption.value} value={countryOption.value}>
+              {countryOption.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <h3>Rate</h3>
+      <Select onValueChange={setSeriesId} value={seriesId}>
+        <SelectTrigger aria-label="Rate" className="w-full md:w-72">
+          <SelectValue placeholder="Select a rate" />
+        </SelectTrigger>
+        <SelectContent align="start">
+          {countrySeries.map((series) => (
+            <SelectItem key={series.id} value={series.id}>
+              {series.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <h3>Range</h3>
+      <Tabs aria-label="Range" onValueChange={setMonths} value={months}>
+        <TabsList>
+          {rangeOptions.map((range) => (
+            <TabsTrigger key={range.value} value={range.value}>
+              {range.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+      <h3>Theme</h3>
+      {renderThemeToggle()}
+    </WidgetBuilderLayout>
   );
 }

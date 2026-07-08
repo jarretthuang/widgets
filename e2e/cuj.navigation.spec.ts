@@ -3,10 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 const LIGHT_THEME_COLOR = "#f8fafc";
 const DARK_THEME_COLOR = "#020617";
 
-async function getThemeColor(
-  page: Page,
-  scheme: "light" | "dark"
-) {
+async function getThemeColor(page: Page, scheme: "light" | "dark") {
   return page
     .locator(
       `meta[name="theme-color"][media="(prefers-color-scheme: ${scheme})"]`
@@ -134,36 +131,31 @@ test("finance widget theme follows the app theme toggle", async ({ page }) => {
   );
 });
 
-test("finance pages use app routes and survive refresh", async ({
-  page,
-}) => {
+test("finance pages use app routes and survive refresh", async ({ page }) => {
   await page.goto("/app/finance/stocks");
 
-  await page.getByRole("link", { name: "Rates" }).click();
+  await page.getByRole("tab", { name: "Rates" }).click();
   await expect(page).toHaveURL(/\/app\/finance\/rates$/);
-  await expect(
-    page.getByRole("heading", { name: /^rates$/i })
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^rates$/i })).toBeVisible();
 
   await page.reload();
   await expect(page).toHaveURL(/\/app\/finance\/rates$/);
-  await expect(
-    page.getByRole("heading", { name: /^rates$/i })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "Rates" })
-  ).toHaveAttribute("aria-current", "page");
+  await expect(page.getByRole("heading", { name: /^rates$/i })).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Rates" })).toHaveAttribute(
+    "aria-selected",
+    "true"
+  );
 
-  await page.getByRole("link", { name: "Stocks" }).click();
+  await page.getByRole("tab", { name: "Stocks" }).click();
   await expect(page).toHaveURL(/\/app\/finance\/stocks$/);
   await expect(page.getByRole("heading", { name: /^stocks$/i })).toBeVisible();
 
   await page.reload();
   await expect(page).toHaveURL(/\/app\/finance\/stocks$/);
   await expect(page.getByRole("heading", { name: /^stocks$/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Stocks" })).toHaveAttribute(
-    "aria-current",
-    "page"
+  await expect(page.getByRole("tab", { name: "Stocks" })).toHaveAttribute(
+    "aria-selected",
+    "true"
   );
 });
 
@@ -185,26 +177,30 @@ test("legacy category routes redirect to app pages", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /countdown/i })).toBeVisible();
 });
 
-test("rates range changes the embedded widget URL", async ({
-  page,
-}) => {
+test("rates range changes the embedded widget URL", async ({ page }) => {
   await page.goto("/app/finance/rates");
 
   const widgetPreview = page.locator('iframe[title="Widget preview"]');
   await expect(widgetPreview).toHaveAttribute("src", /months=60/);
   await expect(widgetPreview).not.toHaveAttribute("src", /frequency=/);
 
-  await page.getByRole("button", { name: "1Y" }).click();
+  await page.getByRole("tab", { name: "1Y" }).click();
   await expect(widgetPreview).toHaveAttribute("src", /months=12/);
 
-  await page.getByRole("button", { name: "5Y" }).click();
+  await page.getByRole("tab", { name: "5Y" }).click();
   await expect(widgetPreview).toHaveAttribute("src", /months=60/);
 
-  await page.getByLabel("Country").selectOption("CA");
+  await page.getByRole("combobox", { name: "Country" }).click();
+  await page.getByRole("option", { name: "Canada" }).click();
   await expect(widgetPreview).toHaveAttribute("src", /IR3TIB01CAM156N/);
-  await expect(page.getByLabel("Rate")).toHaveValue("IR3TIB01CAM156N");
+  await expect(page.getByRole("combobox", { name: "Rate" })).toContainText(
+    "3-month interbank rate"
+  );
 
-  await page.getByLabel("Country").selectOption("CN");
+  await page.getByRole("combobox", { name: "Country" }).click();
+  await page.getByRole("option", { name: "China" }).click();
   await expect(widgetPreview).toHaveAttribute("src", /IR3TIB01CNM156N/);
-  await expect(page.getByLabel("Rate")).toHaveValue("IR3TIB01CNM156N");
+  await expect(page.getByRole("combobox", { name: "Rate" })).toContainText(
+    "3-month interbank rate"
+  );
 });

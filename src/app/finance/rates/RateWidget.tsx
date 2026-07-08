@@ -47,11 +47,11 @@ export default async function RateWidget({
         <div className="flex min-h-0 w-full flex-col gap-2 border border-stone-200 bg-white px-4 py-3 dark:border-stone-800 dark:bg-black">
           <header className="flex shrink-0 items-start">
             <div className="min-w-0">
-              <h1 className="truncate py-0 text-xl font-bold md:text-2xl">
+              <h1 className="truncate py-0 text-base font-semibold md:text-lg">
                 {series.country} · {formatTitle(series.shortLabel)} ·{" "}
                 {formatRange(months)}
               </h1>
-              <p className="mt-0.5 truncate text-xs text-stone-500 dark:text-stone-400">
+              <p className="truncate text-xs text-stone-500 dark:text-stone-400">
                 {series.description}
               </p>
             </div>
@@ -96,9 +96,7 @@ async function getRateData(
 
     if (!observationsResponse.ok) {
       return {
-        message:
-          observationsJson.error_message ??
-          "FRED returned an error.",
+        message: observationsJson.error_message ?? "FRED returned an error.",
         status: "error",
       };
     }

@@ -18,25 +18,25 @@ export default function Home() {
           <div className="relative pb-20 [&>a]:h-40 [&>a]:w-40">
             <Link
               href="/app/finance/stocks"
-              className="dark:border-1 absolute left-[-5rem] top-[-8rem] flex rotate-[-20deg] cursor-pointer select-none rounded-xl bg-white/70 shadow-lg backdrop-blur duration-100 active:bg-white/90 hover:bg-white/90 md:left-[-12rem] dark:border-stone-500/80 dark:bg-teal-700 dark:active:bg-teal-600 dark:hover:bg-teal-600"
+              className="dark:border-1 absolute left-[-5rem] top-[-8rem] flex rotate-[-20deg] cursor-pointer select-none rounded-xl bg-white/70 shadow-lg backdrop-blur duration-100 hover:bg-white/90 active:bg-white/90 dark:border-stone-500/80 dark:bg-teal-700 dark:hover:bg-teal-600 dark:active:bg-teal-600 md:left-[-12rem]"
             >
-              <div className="m-auto text-3xl">
+              <div className="m-auto text-2xl">
                 <MonetizationOnIcon fontSize="large" />
                 <div>Finance</div>
               </div>
             </Link>
             <Link
               href="/app/time/countdown"
-              className="dark:border-1 absolute left-[-5rem] top-[5rem] flex rotate-[30deg] cursor-pointer select-none rounded-xl bg-white/70 shadow-lg backdrop-blur duration-100 active:bg-white/90 hover:bg-white/90 md:left-[2rem] dark:border-stone-500/80 dark:bg-teal-700 dark:active:bg-teal-600 dark:hover:bg-teal-600"
+              className="dark:border-1 absolute left-[-5rem] top-[5rem] flex rotate-[30deg] cursor-pointer select-none rounded-xl bg-white/70 shadow-lg backdrop-blur duration-100 hover:bg-white/90 active:bg-white/90 dark:border-stone-500/80 dark:bg-teal-700 dark:hover:bg-teal-600 dark:active:bg-teal-600 md:left-[2rem]"
             >
-              <div className="m-auto text-3xl">
+              <div className="m-auto text-2xl">
                 <AccessTimeFilledIcon fontSize="large" />
                 <div>Time</div>
               </div>
             </Link>
           </div>
         </div>
-        <div className="pointer-events-none relative inline-flex w-full select-none items-center justify-center py-24 text-xl md:text-2xl">
+        <div className="pointer-events-none relative inline-flex w-full select-none items-center justify-center py-24 text-base md:text-lg">
           <span className="pl-2 md:px-1">Optimized for</span>
           <Image
             src="/notion.png"
@@ -48,7 +48,7 @@ export default function Home() {
           <Image
             src="/branch.svg"
             alt="Notion"
-            className="absolute p-6 opacity-70 md:p-0 dark:opacity-100 dark:invert"
+            className="absolute p-6 opacity-70 dark:opacity-100 dark:invert md:p-0"
             width={300}
             height={200}
           />

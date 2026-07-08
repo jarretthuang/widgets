@@ -8,6 +8,10 @@ import {
   LIGHT_THEME_COLOR,
   THEME_STORAGE_KEY,
 } from "@/components/theme";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const lightThemeColor = LIGHT_THEME_COLOR;
 const darkThemeColor = DARK_THEME_COLOR;
@@ -106,7 +110,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn("font-sans", inter.variable)}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeColorInitScript }} />
       </head>
