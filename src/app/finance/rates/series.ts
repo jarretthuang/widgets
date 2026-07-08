@@ -64,13 +64,6 @@ export const RATE_SERIES = [
     shortLabel: "3M interbank rate",
     description: "China 3-month or 90-day interbank rate",
   },
-  {
-    country: "CN",
-    id: "IR3TTS01CNM156N",
-    label: "3-month treasury securities yield",
-    shortLabel: "3M treasury securities yield",
-    description: "China 3-month or 90-day treasury securities yield",
-  },
 ] as const satisfies RateSeries[];
 
 export const DEFAULT_RATE_SERIES_ID = RATE_SERIES[0].id;

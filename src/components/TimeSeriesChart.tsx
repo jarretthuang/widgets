@@ -127,6 +127,7 @@ export default function TimeSeriesChart({
       bottomColor: `${color}08`,
       lineColor: color,
       lineWidth: 3,
+      priceScaleId: "left",
       priceLineVisible: false,
       topColor: `${color}47`,
     });

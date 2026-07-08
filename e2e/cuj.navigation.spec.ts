@@ -203,4 +203,9 @@ test("rates range changes the embedded widget URL", async ({ page }) => {
   await expect(page.getByRole("combobox", { name: "Rate" })).toContainText(
     "3-month interbank rate"
   );
+
+  await page.getByRole("combobox", { name: "Rate" }).click();
+  await expect(
+    page.getByRole("option", { name: "3-month treasury securities yield" })
+  ).toHaveCount(0);
 });
