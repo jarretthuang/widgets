@@ -23,6 +23,7 @@ type TimeSeriesChartProps = {
   color?: string;
   dateFormatter?: (date: string) => string;
   observations: TimeSeriesDatum[];
+  theme?: "dark" | "light";
   valueFormatter?: (value: number) => string;
 };
 
@@ -35,12 +36,14 @@ export default function TimeSeriesChart({
   color = defaultColor,
   dateFormatter = formatDate,
   observations,
+  theme = "light",
   valueFormatter = formatNumber,
 }: TimeSeriesChartProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const seriesRef = useRef<ISeriesApi<"Area"> | null>(null);
   const [activeDatum, setActiveDatum] = useState<TimeSeriesDatum | null>(null);
+  const isDark = theme === "dark";
   const chartData = useMemo(
     () =>
       observations.map((observation) => ({
@@ -70,10 +73,14 @@ export default function TimeSeriesChart({
       },
       grid: {
         horzLines: {
-          color: "rgba(120, 113, 108, 0.16)",
+          color: isDark
+            ? "rgba(214, 211, 209, 0.18)"
+            : "rgba(120, 113, 108, 0.16)",
         },
         vertLines: {
-          color: "rgba(120, 113, 108, 0.12)",
+          color: isDark
+            ? "rgba(214, 211, 209, 0.14)"
+            : "rgba(120, 113, 108, 0.12)",
         },
       },
       handleScale: {
@@ -94,7 +101,7 @@ export default function TimeSeriesChart({
           color: "transparent",
           type: ColorType.Solid,
         },
-        textColor: "rgb(120, 113, 108)",
+        textColor: isDark ? "rgb(214, 211, 209)" : "rgb(120, 113, 108)",
       },
       leftPriceScale: {
         borderVisible: false,
@@ -149,7 +156,7 @@ export default function TimeSeriesChart({
       chartRef.current = null;
       seriesRef.current = null;
     };
-  }, [axisDateFormatter, color, valueFormatter]);
+  }, [axisDateFormatter, color, isDark, valueFormatter]);
 
   useEffect(() => {
     if (!seriesRef.current || !chartRef.current) {
@@ -161,7 +168,9 @@ export default function TimeSeriesChart({
   }, [chartData]);
 
   return (
-    <div className={`min-h-0 flex-1 bg-white dark:bg-black ${className}`}>
+    <div
+      className={`min-h-0 flex-1 ${isDark ? "bg-black" : "bg-white"} ${className}`}
+    >
       <div className="relative h-full min-h-0 min-w-0">
         <div
           aria-label={ariaLabel}
@@ -170,7 +179,11 @@ export default function TimeSeriesChart({
           role="img"
         />
         {activeDatum && (
-          <div className="pointer-events-none absolute right-4 top-3 z-20 rounded-lg bg-stone-950 px-3 py-2 text-left text-xs text-white shadow-sm dark:bg-white dark:text-stone-950">
+          <div
+            className={`pointer-events-none absolute right-4 top-3 z-20 rounded-lg px-3 py-2 text-left text-xs shadow-sm ${
+              isDark ? "bg-white text-stone-950" : "bg-stone-950 text-white"
+            }`}
+          >
             <div className="font-semibold">
               {dateFormatter(activeDatum.date)}
             </div>

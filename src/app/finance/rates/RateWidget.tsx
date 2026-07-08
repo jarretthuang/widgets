@@ -1,5 +1,6 @@
 import { getRateSeries } from "@/app/finance/rates/series";
 import RateChart from "@/app/finance/rates/RateChart";
+import RateWidgetTheme from "@/app/finance/rates/RateWidgetTheme";
 
 type FredObservation = {
   date: string;
@@ -35,31 +36,46 @@ export default async function RateWidget({
 }: {
   months: number;
   seriesId: string;
-  theme: string;
+  theme: "dark" | "light";
 }) {
   const series = getRateSeries(seriesId);
   const data = await getRateData(series.id, months);
   const isDark = theme === "dark";
 
   return (
-    <div className={isDark ? "dark" : ""}>
-      <main className="flex h-svh w-full overflow-hidden bg-white text-stone-900 dark:bg-black dark:text-stone-50">
-        <div className="flex min-h-0 w-full flex-col gap-2 border border-stone-200 bg-white px-4 py-3 dark:border-stone-800 dark:bg-black">
+    <>
+      <RateWidgetTheme theme={theme} />
+      <main
+        className={`flex h-svh w-full overflow-hidden ${
+          isDark ? "bg-black text-stone-50" : "bg-white text-stone-900"
+        }`}
+      >
+        <div
+          className={`flex min-h-0 w-full flex-col gap-2 border px-4 py-3 ${
+            isDark
+              ? "border-stone-800 bg-black"
+              : "border-stone-200 bg-white"
+          }`}
+        >
           <header className="flex shrink-0 items-start">
             <div className="min-w-0">
               <h1 className="truncate py-0 text-base font-semibold md:text-lg">
                 {series.country} · {formatTitle(series.shortLabel)} ·{" "}
                 {formatRange(months)}
               </h1>
-              <p className="truncate text-xs text-stone-500 dark:text-stone-400">
+              <p
+                className={`truncate text-xs ${
+                  isDark ? "text-stone-400" : "text-stone-500"
+                }`}
+              >
                 {series.description}
               </p>
             </div>
           </header>
-          {renderContent(data)}
+          {renderContent(data, theme)}
         </div>
       </main>
-    </div>
+    </>
   );
 }
 
@@ -133,18 +149,25 @@ function getObservationStartDate(months: number) {
   return date.toISOString().slice(0, 10);
 }
 
-function renderContent(data: RateData) {
+function renderContent(data: RateData, theme: "dark" | "light") {
   if (data.status === "missing-key") {
     return (
       <WidgetMessage
         title="FRED_API_KEY required"
         body="Add a free FRED API key to your environment to load this widget."
+        theme={theme}
       />
     );
   }
 
   if (data.status === "error") {
-    return <WidgetMessage title="Unable to load rates" body={data.message} />;
+    return (
+      <WidgetMessage
+        title="Unable to load rates"
+        body={data.message}
+        theme={theme}
+      />
+    );
   }
 
   if (data.status === "empty") {
@@ -152,22 +175,41 @@ function renderContent(data: RateData) {
       <WidgetMessage
         title="No observations"
         body="FRED did not return data for this series and range."
+        theme={theme}
       />
     );
   }
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-2">
-      <RateChart observations={data.observations} />
+      <RateChart observations={data.observations} theme={theme} />
     </div>
   );
 }
 
-function WidgetMessage({ body, title }: { body: string; title: string }) {
+function WidgetMessage({
+  body,
+  theme,
+  title,
+}: {
+  body: string;
+  theme: "dark" | "light";
+  title: string;
+}) {
+  const isDark = theme === "dark";
+
   return (
-    <div className="flex min-h-0 flex-1 flex-col items-center justify-center bg-white p-8 text-center dark:bg-black">
+    <div
+      className={`flex min-h-0 flex-1 flex-col items-center justify-center p-8 text-center ${
+        isDark ? "bg-black" : "bg-white"
+      }`}
+    >
       <h2 className="py-0 text-xl font-bold">{title}</h2>
-      <p className="mt-2 max-w-sm text-sm text-stone-500 dark:text-stone-400">
+      <p
+        className={`mt-2 max-w-sm text-sm ${
+          isDark ? "text-stone-400" : "text-stone-500"
+        }`}
+      >
         {body}
       </p>
     </div>

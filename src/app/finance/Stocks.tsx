@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { useTheme } from "next-themes";
 import StockPresets from "./StockPresets";
@@ -8,11 +8,12 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 
 export default function Stocks() {
-  const { theme: appTheme, resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [stockSymbol, updateStockSymbol] = useState("SPX500");
   const [debouncedStockSymbol] = useDebounce(stockSymbol, 500);
   const [useDarkMode, setUseDarkMode] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const hasInitializedTheme = useRef(false);
 
   const theme = useDarkMode ? "dark" : "light";
   const stockChartUrl = `/finance/stocks?symbol=${debouncedStockSymbol}&theme=${theme}`;
@@ -22,10 +23,14 @@ export default function Stocks() {
   }, []);
 
   useEffect(() => {
-    if (resolvedTheme === "dark" || resolvedTheme === "light") {
+    if (
+      !hasInitializedTheme.current &&
+      (resolvedTheme === "dark" || resolvedTheme === "light")
+    ) {
       setUseDarkMode(resolvedTheme === "dark");
+      hasInitializedTheme.current = true;
     }
-  }, [appTheme, resolvedTheme]);
+  }, [resolvedTheme]);
 
   const renderThemeToggle = () => {
     if (hasLoaded) {
