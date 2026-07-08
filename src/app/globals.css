@@ -24,6 +24,16 @@ body {
   background-color: var(--page-background);
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html:not(.light) {
     --page-background: #020617;
@@ -44,7 +54,7 @@ body {
   }
 
   section {
-    @apply flex w-full flex-col gap-2 whitespace-nowrap rounded-2xl border border-stone-300 px-3 py-4 md:px-8 md:py-6 dark:border-stone-700;
+    @apply flex w-full flex-col gap-2 whitespace-nowrap rounded-2xl border border-stone-300 px-3 py-4 dark:border-stone-700 md:px-8 md:py-6;
     @apply bg-white/50 dark:bg-stone-950/50;
   }
 }
