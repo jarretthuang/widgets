@@ -6,12 +6,15 @@ export const metadata: Metadata = {
   description: "A collection of web widgets for finance",
 };
 
-export default function FinancePage({
+export default async function FinancePage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const selectedTab = getSingleValue(searchParams.tab ?? searchParams.widget);
+  const resolvedSearchParams = await searchParams;
+  const selectedTab = getSingleValue(
+    resolvedSearchParams.tab ?? resolvedSearchParams.widget
+  );
 
   if (selectedTab === "rates") {
     redirect("/app/finance/rates");

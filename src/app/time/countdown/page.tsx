@@ -3,15 +3,15 @@ import React from "react";
 import CountdownWidget from "@/app/time/countdown/CountdownWidget";
 
 type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const till = parseDate(searchParams["till"]);
+  const resolvedSearchParams = await searchParams;
+  const till = parseDate(getSingleValue(resolvedSearchParams["till"]));
   const date = till ? `till ${till.toLocaleDateString()}` : "";
   return {
     title: `Countdown ${date}`,
@@ -19,15 +19,24 @@ export async function generateMetadata(
   };
 }
 
-export default function CountdownPage({ params, searchParams }: Props) {
-  const till = parseDate(searchParams["till"]);
-  const description = searchParams["description"];
+export default async function CountdownPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const till = parseDate(getSingleValue(resolvedSearchParams["till"]));
+  const description = getSingleValue(resolvedSearchParams["description"]);
   return (
     <CountdownWidget date={till} description={description} />
   );
 }
 
-function parseDate(utcNumber: string): Date | undefined {
+function getSingleValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function parseDate(utcNumber: string | undefined): Date | undefined {
+  if (!utcNumber) {
+    return undefined;
+  }
+
   const date = new Date(parseInt(utcNumber));
   return isNaN(date.getTime()) ? undefined : date;
 }

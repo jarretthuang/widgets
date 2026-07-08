@@ -3,16 +3,15 @@ import StockChart from "@/app/finance/stocks/StockChart";
 import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const stockSymbol = searchParams["symbol"] ?? "AMEX:VOO";
-  const height = searchParams["height"] ?? "400";
+  const resolvedSearchParams = await searchParams;
+  const stockSymbol = getSingleValue(resolvedSearchParams["symbol"]) ?? "AMEX:VOO";
 
   return {
     title: stockSymbol,
@@ -20,11 +19,12 @@ export async function generateMetadata(
   };
 }
 
-export default function StocksPage({ params, searchParams }: Props) {
-  const stockSymbol = searchParams["symbol"] ?? "AMEX:VOO";
-  const height = searchParams["height"] ?? "400";
-  const allowChange: boolean = searchParams["allowChange"] === "true";
-  const theme: string = searchParams["theme"] ?? "light";
+export default async function StocksPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const stockSymbol = getSingleValue(resolvedSearchParams["symbol"]) ?? "AMEX:VOO";
+  const height = getSingleValue(resolvedSearchParams["height"]) ?? "400";
+  const allowChange = getSingleValue(resolvedSearchParams["allowChange"]) === "true";
+  const theme = getSingleValue(resolvedSearchParams["theme"]) ?? "light";
 
   return (
     <>
@@ -36,4 +36,8 @@ export default function StocksPage({ params, searchParams }: Props) {
       ></StockChart>
     </>
   );
+}
+
+function getSingleValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
 }

@@ -3,15 +3,15 @@ import RateWidget from "@/app/finance/rates/RateWidget";
 import { getRateSeries } from "@/app/finance/rates/series";
 
 type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata(
   { searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const series = getRateSeries(searchParams["series"]);
+  const resolvedSearchParams = await searchParams;
+  const series = getRateSeries(getSingleValue(resolvedSearchParams["series"]));
 
   return {
     title: series.label,
@@ -19,10 +19,11 @@ export async function generateMetadata(
   };
 }
 
-export default function RatesPage({ searchParams }: Props) {
-  const series = getRateSeries(searchParams["series"]);
-  const months = parseMonths(searchParams["months"]);
-  const theme = searchParams["theme"] === "dark" ? "dark" : "light";
+export default async function RatesPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const series = getRateSeries(getSingleValue(resolvedSearchParams["series"]));
+  const months = parseMonths(getSingleValue(resolvedSearchParams["months"]));
+  const theme = getSingleValue(resolvedSearchParams["theme"]) === "dark" ? "dark" : "light";
 
   return (
     <RateWidget
@@ -31,6 +32,10 @@ export default function RatesPage({ searchParams }: Props) {
       theme={theme}
     />
   );
+}
+
+function getSingleValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
 }
 
 function parseMonths(value?: string) {
