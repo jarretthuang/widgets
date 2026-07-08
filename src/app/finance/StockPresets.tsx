@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "@/components/ui/button";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 type Country = "US" | "CA" | "CN" | "HK" | "JP";
 type StockType = "index" | "tech" | "etf" | "crypto";
@@ -87,22 +89,31 @@ export default function StockPresets({
   const renderStocks = (stocks: PresetStock[], title: string) => {
     return (
       <div>
-        <h4>{title}</h4>
-        <div className="flex cursor-pointer select-none flex-wrap gap-4 py-2">
+        <h4 className="text-sm font-medium text-muted-foreground">{title}</h4>
+        <ToggleGroup
+          className="flex w-full flex-wrap gap-4 py-2"
+          onValueChange={(symbol) => {
+            if (symbol) {
+              onSelect(symbol);
+            }
+          }}
+          type="single"
+          value={currentSymbol}
+          variant="outline"
+        >
           {stocks.map((stock) => (
-            <button
+            <ToggleGroupItem
               key={stock.symbol}
-              className="rounded-lg border border-gray-300 bg-white px-2 py-1 font-medium active:bg-gray-50 data-[selected=true]:border-gray-400 data-[selected=true]:bg-gray-100 hover:border-gray-400 hover:bg-gray-50 dark:border-stone-700 dark:bg-stone-800 dark:active:bg-stone-700 dark:data-[selected=true]:bg-stone-700 dark:hover:bg-stone-700"
-              data-selected={currentSymbol === stock.symbol}
-              onClick={() => onSelect(stock.symbol)}
+              className="data-[state=on]:border-primary/35 h-auto px-2 py-1 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
+              value={stock.symbol}
             >
               {stock.displayName}
               <span className="ml-2 text-gray-500">
                 {renderCountryEmoji(stock.country)}
               </span>
-            </button>
+            </ToggleGroupItem>
           ))}
-        </div>
+        </ToggleGroup>
       </div>
     );
   };
@@ -117,12 +128,13 @@ export default function StockPresets({
           {renderStocks(cryptoStocks, "Crypto")}
         </>
       )}
-      <button
+      <Button
         onClick={() => setIsVisible(!isVisible)}
-        className="mb-2 self-start text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+        className="mb-2 self-start px-0 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+        variant="link"
       >
         {isVisible ? "Hide presets" : "Show presets"}
-      </button>
+      </Button>
     </div>
   );
 }

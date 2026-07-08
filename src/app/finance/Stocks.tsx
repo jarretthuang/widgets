@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import { Switch } from "react-aria-components";
 import { useTheme } from "next-themes";
-import Input from "@/components/Input";
 import StockPresets from "./StockPresets";
-import WidgetCard from "@/components/WidgetCard";
+import WidgetBuilderLayout from "@/components/WidgetBuilderLayout";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 
 export default function Stocks() {
-  const { theme: appTheme, resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [stockSymbol, updateStockSymbol] = useState("SPX500");
   const [debouncedStockSymbol] = useDebounce(stockSymbol, 500);
   const [useDarkMode, setUseDarkMode] = useState(false);
@@ -25,47 +25,38 @@ export default function Stocks() {
     if (resolvedTheme === "dark" || resolvedTheme === "light") {
       setUseDarkMode(resolvedTheme === "dark");
     }
-  }, [appTheme, resolvedTheme]);
+  }, [resolvedTheme]);
 
   const renderThemeToggle = () => {
     if (hasLoaded) {
       return (
-        <Switch
-          className="group flex w-min cursor-pointer select-none items-center gap-2"
-          isSelected={useDarkMode}
-          onChange={setUseDarkMode}
-        >
-          <div className="box-border flex h-[26px] w-[44px] shrink-0 rounded-full border border-solid border-white/30 bg-stone-200/80 bg-clip-padding p-[3px] shadow-inner outline-none ring-black transition duration-200 ease-in-out group-focus-visible:ring-2 group-pressed:opacity-80  group-selected:bg-stone-700/50">
-            <span className="h-[18px] w-[18px] translate-x-0 transform rounded-full bg-white shadow transition duration-200 ease-in-out group-selected:translate-x-[100%] group-selected:border-stone-700 group-selected:bg-stone-900" />
-          </div>
+        <div className="flex w-fit select-none items-center gap-2 text-sm font-medium">
+          <Switch
+            aria-label={useDarkMode ? "Dark" : "Light"}
+            checked={useDarkMode}
+            onCheckedChange={setUseDarkMode}
+          />
           <span>{useDarkMode ? "Dark" : "Light"}</span>
-        </Switch>
+        </div>
       );
     }
   };
 
   return (
-    <>
-      <h1 className="px-1">Stocks</h1>
-      <div className="flex h-full w-full flex-col gap-16 md:gap-8">
-        <section>
-          <h2>Configurations</h2>
-          <h3>Stock (Asset) Symbol</h3>
-          <Input
-            className="md:w-72"
-            placeholder="e.g. SPX500, AAPL"
-            value={stockSymbol}
-            onChange={updateStockSymbol}
-          ></Input>
-          <StockPresets
-            currentSymbol={debouncedStockSymbol}
-            onSelect={updateStockSymbol}
-          />
-          <h3>Theme</h3>
-          {renderThemeToggle()}
-        </section>
-        <WidgetCard widgetUrl={stockChartUrl} />
-      </div>
-    </>
+    <WidgetBuilderLayout title="Stocks" widgetUrl={stockChartUrl}>
+      <h3>Stock (Asset) Symbol</h3>
+      <Input
+        className="md:w-72"
+        placeholder="e.g. SPX500, AAPL"
+        value={stockSymbol}
+        onChange={(event) => updateStockSymbol(event.target.value)}
+      />
+      <StockPresets
+        currentSymbol={debouncedStockSymbol}
+        onSelect={updateStockSymbol}
+      />
+      <h3>Theme</h3>
+      {renderThemeToggle()}
+    </WidgetBuilderLayout>
   );
 }
